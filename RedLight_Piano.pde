@@ -63,6 +63,12 @@ void setup ()
     square.end = new GridCell(5, 6, new Sound("Hadouken"));
     square.duration = 2;
     renderTheseSquares.add(square);
+    
+    // 3 more squares to continue the path from the first one
+    renderTheseSquares.add( new Square(new GridCell(0, 10), new GridCell(0, 0), 5, grid, 5) );
+    renderTheseSquares.add( new Square(new GridCell(0, 0),  new GridCell(0, 5), 4, grid, 10) );
+    square = new Square(new GridCell(0, 5),  new GridCell(0, 0), 3, grid, 14); renderTheseSquares.add(square);
+    square = new Square(new GridCell(0, 0),  new GridCell(0, 0), 8, grid, 17); square.blink = blink2del3sec; renderTheseSquares.add(square); // simulate hold
 }
 
 void draw ()
