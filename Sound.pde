@@ -5,8 +5,6 @@ class Sound
     private float lastPlayed;
     private AudioPlayer player;
     
-    Sound () {}
-    
     Sound (String cSource)
     {
         source = cSource;
