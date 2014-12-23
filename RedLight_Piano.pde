@@ -62,7 +62,6 @@ void setup ()
     square.start = new GridCell(3, 0);
     square.end = new GridCell(5, 6, new Sound("Hadouken"));
     square.duration = 2;
-    square.delay = 0;
     renderTheseSquares.add(square);
 }
 
