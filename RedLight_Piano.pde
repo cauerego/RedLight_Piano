@@ -139,7 +139,7 @@ class Square
         float norm = millis() - (startTime + (delay * 1000));
         float ammt = norm / dur;
         
-        if (norm >= 0 && norm <= dur)
+        if (norm >= 0 && norm < dur)
         {
             //int steps = int( norm % (stepDelay * 1000) );
             //print(start, end, ammt, int(lerp(start.x, end.x, ammt)));
@@ -234,13 +234,13 @@ class Blink
 
 
 // made thinking in just 1 grid, with different sounds
-// but also expandable in the future to allows different grids for each square
+// but also expandable in the future to allow different grids for each square
 class Grid
 {
     PVector cellSize;
     //ArrayList<PVector> cells = new ArrayList<PVector>();
     ArrayList cells = new ArrayList();
-    Sound[][] soundArray = new Sound[99][99];
+    Sound[][] soundArray = new Sound[99][99]; // little ugly hack to enable finding sound per cell position
     
     void Add (GridCell cell)
     {
