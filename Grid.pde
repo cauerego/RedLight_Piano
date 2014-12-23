@@ -13,10 +13,13 @@ class Grid
         soundArray[int(cell.pos.x)][int(cell.pos.y)] = cell.sound;
     }
     
-    void SetSound (Sound sound)
+    void SetSound (Sound newSound)
     {
+        if (newSound == null) return;
+        
         for (int i = 0; i < cells.size(); i++)
         {
+            Sound sound = new Sound(newSound);
             GridCell cell = (GridCell) cells.get(i);
             cell.sound = sound;
             soundArray[int(cell.pos.x)][int(cell.pos.y)] = cell.sound;
