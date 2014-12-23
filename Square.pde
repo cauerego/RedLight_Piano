@@ -7,7 +7,6 @@ class Square
     Grid grid;
     float delay; // how long to hold before displaying the square at first, in seconds
     Blink blink;
-//    Hold hold;
 //    Opacity opacity;
     
     // variables
