@@ -148,6 +148,7 @@ class Square
             pos.y = int( lerp(start.pos.y, end.pos.y, ammt) );
             
             PVector floatPos = PVector.lerp(start.pos, end.pos, ammt);
+            //pos = floatPos; // simpler walking without stepping
             
             // sound and cell verification
             Sound sound = grid.soundArray[int(pos.x)][int(pos.y)];
