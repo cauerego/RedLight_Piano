@@ -20,7 +20,7 @@ void setup ()
     {
         for (int y = 0; y < 31; y++)
         {
-            if (x == 0 || x == 6 || y < 17)
+            if (x == 0 || x == 6 || y < 19)
             {
                 Sound sound = new Sound("blood_splat"); // just leave a default sound for all cells
                 GridCell cell = new GridCell(x, y, sound);
