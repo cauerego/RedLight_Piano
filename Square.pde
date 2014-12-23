@@ -23,6 +23,7 @@ class Square
         blink = null;
     }
     
+    // minimum needed
     private void Initialize (GridCell cStart, GridCell cEnd, float cDuration, Grid cGrid)
     {
         Initialize();
@@ -30,6 +31,16 @@ class Square
         end = cEnd;
         duration = cDuration;
         grid = cGrid;
+    }
+    
+    // maximum possible
+    private void Initialize (GridCell cStart, GridCell cEnd, float cDuration, Grid cGrid,
+      Sound setGridSound, float cDelay, Blink cBlink)
+    {
+        Initialize(cStart, cEnd, cDuration, cGrid);
+        grid.SetSound(setGridSound);
+        delay = cDelay;
+        blink = cBlink;
     }
     
     Square () { Initialize(); }
@@ -41,8 +52,18 @@ class Square
     
     Square (GridCell cStart, GridCell cEnd, float cDuration, Grid cGrid, float cDelay)
     {
-        Initialize(cStart, cEnd, cDuration, cGrid);
-        delay = cDelay;
+        Initialize(cStart, cEnd, cDuration, cGrid, null, cDelay, null);
+    }
+    
+    Square (GridCell cStart, GridCell cEnd, float cDuration, Grid cGrid, float cDelay, Blink cBlink)
+    {
+        Initialize(cStart, cEnd, cDuration, cGrid, null, cDelay, cBlink);
+    }
+    
+    Square (GridCell cStart, GridCell cEnd, float cDuration, Grid cGrid,
+      Sound setGridSound, float cDelay, Blink cBlink)
+    {
+        Initialize(cStart, cEnd, cDuration, cGrid, setGridSound, cDelay, cBlink);
     }
     
     // methods
