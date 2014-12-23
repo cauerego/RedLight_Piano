@@ -229,11 +229,11 @@ class Blink
         
         if (norm(millis() % interval, 0, interval) > blinkAmmt)
         {
-            sound.player.play();
+            if (sound != null) sound.player.play();
             return true;
         }
         
-        sound.player.rewind();
+        if (sound != null) sound.player.rewind();
         return false;
     }
 }
