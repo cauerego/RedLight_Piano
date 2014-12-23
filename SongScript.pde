@@ -1,3 +1,4 @@
+// supposed to be executed just once at setup()
 void SongScript ()
 {
     // sound file names, which need to be mp3 within same folder

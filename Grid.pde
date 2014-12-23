@@ -1,5 +1,5 @@
-// made thinking in just 1 grid, with different sounds
-// but also expandable in the future to allow different grids for each square
+// this Grid was made thinking in just 1 grid, with different sounds
+// it should be expandable in the future to allow different grids for each square, if that ever makes any sense
 class Grid
 {
     PVector cellSize;
