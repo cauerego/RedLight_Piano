@@ -13,7 +13,7 @@ void SongScript ()
             {
                 Sound sound = new Sound("blood_splat"); // just leave a default sound for all cells
                 GridCell cell = new GridCell(x, y, sound);
-                grid.Add(cell);
+                mainGrid.Add(cell);
             }
         }
     }
@@ -28,7 +28,7 @@ void SongScript ()
     square.start = new GridCell(0, 0, new Sound("Hadouken"));
     square.end = new GridCell(0, 10);
     square.duration = 5;
-    square.grid = grid;
+    square.grid = mainGrid;
     square.delay = 0;
     
     // add that one square to a list, which could contain many
@@ -39,14 +39,14 @@ void SongScript ()
       new GridCell(6, 3),
       new GridCell(6, 12),
       10,
-      grid,
+      mainGrid,
       1);
     square.blink = blink120bpm;
     renderTheseSquares.add(square);
     
     // and so on
     square = new Square();
-    square.grid = grid;
+    square.grid = mainGrid;
     square.grid.SetSound(null);
     square.start = new GridCell(3, 0);
     square.end = new GridCell(5, 6, new Sound("Hadouken"));
@@ -54,8 +54,8 @@ void SongScript ()
     renderTheseSquares.add(square);
     
     // 4 more squares to continue the path from the first one
-    renderTheseSquares.add( new Square(new GridCell(0, 10), new GridCell(0, 0), 5, grid, 5) );
-    renderTheseSquares.add( new Square(new GridCell(0, 0),  new GridCell(0, 5), 4, grid, 10) );
-    square = new Square(new GridCell(0, 5),  new GridCell(0, 0), 3, grid, 14); renderTheseSquares.add(square);
-    square = new Square(new GridCell(0, 0),  new GridCell(0, 0), 8, grid, 17); square.blink = blink2del3sec; renderTheseSquares.add(square); // simulate hold
+    renderTheseSquares.add( new Square(new GridCell(0, 10), new GridCell(0, 0), 5, mainGrid, 5) );
+    renderTheseSquares.add( new Square(new GridCell(0, 0),  new GridCell(0, 5), 4, mainGrid, 10) );
+    square = new Square(new GridCell(0, 5),  new GridCell(0, 0), 3, mainGrid, 14); renderTheseSquares.add(square);
+    square = new Square(new GridCell(0, 0),  new GridCell(0, 0), 8, mainGrid, 17); square.blink = blink2del3sec; renderTheseSquares.add(square); // simulate hold
 }
