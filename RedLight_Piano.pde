@@ -151,7 +151,7 @@ class Square
             
             // sound and cell verification
             Sound sound = grid.soundArray[int(pos.x)][int(pos.y)];
-            if (floatPos.dist(start.pos) < 1) sound = start.sound;
+            if (pos.dist(start.pos) == 0) sound = start.sound;
             if (floatPos.dist(end.pos) < 1) sound = end.sound;
             if (sound != null)
             {
