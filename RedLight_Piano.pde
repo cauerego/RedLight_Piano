@@ -12,9 +12,8 @@ void setup ()
     
     grid.cellSize = new PVector(10, 10);
     
-    Sound noise = new Sound("blood_hit");
-    Sound noise2 = new Sound("blood_splat");
-    Sound noise3 = new Sound("Hadouken");
+    // sound file names, which need to be mp3 within same folder
+    Sound blinkNoise = new Sound("blood_hit");
     
     // create the grid, without customizing sounds for each cell or square yet
     for (int x = 0; x < 7; x++)
@@ -23,21 +22,21 @@ void setup ()
         {
             if (x == 0 || x == 6 || y < 17)
             {
-                Sound sound = noise2; // just leave a default sound for all cells
+                Sound sound = new Sound("blood_splat"); // just leave a default sound for all cells
                 GridCell cell = new GridCell(x, y, sound);
                 grid.Add(cell);
             }
         }
     }
     
-    Blink blink120bpm = new Blink(120, noise);
+    Blink blink120bpm = new Blink(120, blinkNoise);
     Blink blink2del3sec = new Blink(240, 2, 3);
     
     Square square;
     
     // create first square with a different sound on start
     square = new Square();
-    square.start = new GridCell(0, 0, noise3);
+    square.start = new GridCell(0, 0, new Sound("Hadouken"));
     square.end = new GridCell(0, 10);
     square.duration = 5;
     square.grid = grid;
@@ -49,7 +48,7 @@ void setup ()
     // then the second square
     square = new Square(
       new GridCell(6, 3),
-      new GridCell(6, 12, noise3),
+      new GridCell(6, 12),
       10,
       grid,
       1);
@@ -61,7 +60,7 @@ void setup ()
     square.grid = grid;
     square.grid.SetSound(null);
     square.start = new GridCell(3, 0);
-    square.end = new GridCell(5, 6);
+    square.end = new GridCell(5, 6, new Sound("Hadouken"));
     square.duration = 2;
     square.delay = 0;
     renderTheseSquares.add(square);
