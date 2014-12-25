@@ -43,28 +43,38 @@ class GridCell
     PVector pos; // position
     Sound sound;
     
-    GridCell (PVector cPos, Sound newSound)
+    void Initialize (PVector cPos, Sound newSound)
     {
         pos = cPos;
-        sound = new Sound(newSound);
+        if (newSound != null)
+        {
+            sound = new Sound(newSound);
+        }
+    }
+    
+    GridCell (PVector cPos, Sound newSound)
+    {
+        Initialize(cPos, newSound);
     }
     
     GridCell (float x, float y)
     {
-        pos = new PVector(x, y);
-        sound = null;
+        Initialize(new PVector(x, y), null);
     }
     
     GridCell (float x, float y, Sound newSound)
     {
-        pos = new PVector(x, y);
-        sound = new Sound(newSound);
+        Initialize(new PVector(x, y), newSound);
     }
     
     GridCell (float x, float y, String soundName)
     {
-        pos = new PVector(x, y);
-        sound = new Sound(soundName);
+        Sound sound = null;
+        if (soundName != null)
+        {
+            sound = new Sound(soundName);
+        }
+        Initialize(new PVector(x, y), sound);
     }
 }
 
