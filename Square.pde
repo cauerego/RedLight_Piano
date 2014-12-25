@@ -13,7 +13,8 @@ class Square
     
     private float startTime;
     private PVector pos;
-    
+    private PVector floatPos;
+    private GridCell lastCell; // just so we know we moved to a new cell and we can rewind the sound
     
     // constructor
     
@@ -87,23 +88,38 @@ class Square
             pos.x = int( lerp(start.pos.x, end.pos.x, ammt) );
             pos.y = int( lerp(start.pos.y, end.pos.y, ammt) );
             
-            PVector floatPos = PVector.lerp(start.pos, end.pos, ammt);
+            floatPos = PVector.lerp(start.pos, end.pos, ammt);
             //pos = floatPos; // simpler walking without stepping
             
-            // sound and cell verification
-            Sound sound = grid.soundArray[int(pos.x)][int(pos.y)];
-            if (pos.dist(start.pos) == 0) sound = start.sound;
-            if (floatPos.dist(end.pos) < 1) sound = end.sound;
-            if (sound != null)
-            {
-                sound.player.play();
-            }
+            PlaySound();
             
             if (blink == null || blink.Okay(norm))
             {
                 fill(255,0,0);
                 rect(pos.x * grid.cellSize.x, pos.y * grid.cellSize.y, grid.cellSize.x, grid.cellSize.y);
             }
+        }
+    }
+    
+    private void PlaySound ()
+    {
+        // sound and cell verification: end sound > start sound > grid sound
+        Sound sound = grid.soundArray[int(pos.x)][int(pos.y)];
+        if (pos.dist(start.pos) == 0) sound = start.sound;
+        if (floatPos.dist(end.pos) < 1) sound = end.sound;
+        
+        // applying lastCell verification
+        if (lastCell != null && pos.dist(lastCell.pos) > 0)
+        {
+            if (lastCell.sound != null) lastCell.sound.player.rewind();
+        }
+        lastCell = new GridCell(pos.x, pos.y);
+        lastCell.sound = sound;
+        
+        // finally play sound if available
+        if (sound != null)
+        {
+            sound.player.play();
         }
     }
 }
