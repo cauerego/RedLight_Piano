@@ -20,7 +20,6 @@ void SongScript ()
             }
         }
     }
-    mainGrid.SetSound(stepNoise);
     
     Blink blink120bpm = new Blink(120, blinkNoise);
     Blink blink2del3sec = new Blink(240, 2, 3);
@@ -34,8 +33,7 @@ void SongScript ()
     square.duration = 5;
     square.grid = mainGrid;
     square.delay = 0;
-    
-    // add that one square to a list, which could contain many
+    // add that one square to a list, which will contain many
     renderTheseSquares.add(square);
     
     // then the second square
@@ -57,7 +55,7 @@ void SongScript ()
     square.duration = 2;
     renderTheseSquares.add(square);
     
-    // 4 more squares to continue the path from the first one
+    // 4 more squares to continue the path from the first one, made in different possible ways
     renderTheseSquares.add( new Square(new GridCell(0, 10), new GridCell(0, 0), 5, mainGrid, stepNoise, 5, null) );
     renderTheseSquares.add( new Square(new GridCell(0, 0),  new GridCell(0, 5), 4, mainGrid, stepNoise, 10, null) );
     square = new Square(new GridCell(0, 5),  new GridCell(0, 0), 3, mainGrid, 14); renderTheseSquares.add(square);
