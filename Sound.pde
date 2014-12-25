@@ -20,7 +20,7 @@ class Sound
 
     Sound (Sound cSound)
     {
-        if (cSound != null) Initialize(cSound.source, cSound.duration);
+        Initialize(cSound.source, cSound.duration);
     }
 }
 
