@@ -4,6 +4,7 @@ void SongScript ()
     // sound file names, which need to be mp3 within same folder
     Sound blinkNoise = new Sound("blood_hit");
     Sound stepNoise = new Sound("blood_splat");
+    Sound startEndNoise = new Sound("Hadouken");
     
     // create the grid, without customizing sounds for each cell or square yet
     for (int x = 0; x < 7; x++)
@@ -12,12 +13,14 @@ void SongScript ()
         {
             if (x == 0 || x == 6 || y < 19)
             {
-                Sound sound = new Sound("blood_splat"); // just leave a default sound for all cells
+                // here, each cell could have a different sound
+                Sound sound = stepNoise; // but we'll just leave a default sound for all cells for now
                 GridCell cell = new GridCell(x, y, sound);
                 mainGrid.Add(cell);
             }
         }
     }
+    mainGrid.SetSound(stepNoise);
     
     Blink blink120bpm = new Blink(120, blinkNoise);
     Blink blink2del3sec = new Blink(240, 2, 3);
@@ -26,7 +29,7 @@ void SongScript ()
     
     // create first square with a different sound on start
     square = new Square();
-    square.start = new GridCell(0, 0, new Sound("Hadouken"));
+    square.start = new GridCell(0, 0, startEndNoise);
     square.end = new GridCell(0, 10);
     square.duration = 5;
     square.grid = mainGrid;
@@ -50,7 +53,7 @@ void SongScript ()
     square.grid = mainGrid;
     square.grid.SetSound(null);
     square.start = new GridCell(3, 0);
-    square.end = new GridCell(5, 6, new Sound("Hadouken"));
+    square.end = new GridCell(5, 6, startEndNoise);
     square.duration = 2;
     renderTheseSquares.add(square);
     

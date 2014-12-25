@@ -16,10 +16,10 @@ class Grid
     void SetSound (Sound newSound)
     {
         if (newSound == null) return;
+        Sound sound = new Sound(newSound);
         
         for (int i = 0; i < cells.size(); i++)
         {
-            Sound sound = new Sound(newSound);
             GridCell cell = (GridCell) cells.get(i);
             cell.sound = sound;
             soundArray[int(cell.pos.x)][int(cell.pos.y)] = cell.sound;
@@ -43,10 +43,10 @@ class GridCell
     PVector pos; // position
     Sound sound;
     
-    GridCell (PVector cPos, Sound cSound)
+    GridCell (PVector cPos, Sound newSound)
     {
         pos = cPos;
-        sound = cSound;
+        sound = new Sound(newSound);
     }
     
     GridCell (float x, float y)
@@ -55,10 +55,10 @@ class GridCell
         sound = null;
     }
     
-    GridCell (float x, float y, Sound cSound)
+    GridCell (float x, float y, Sound newSound)
     {
         pos = new PVector(x, y);
-        sound = cSound;
+        sound = new Sound(newSound);
     }
     
     GridCell (float x, float y, String soundName)
