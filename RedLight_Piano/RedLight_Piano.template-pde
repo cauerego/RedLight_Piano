@@ -7,10 +7,10 @@ Grid mainGrid = new Grid();
 
 void setup ()
 {
-    size (200, 400);
+    size (displayWidth, displayHeight);
     minim = new Minim(this); // for sound
     
-    mainGrid.cellSize = new PVector(10, 10);
+    mainGrid.cellSize = new PVector(width/7, height/31);
     
     SongScript();
 }
@@ -24,3 +24,7 @@ void draw ()
     DisplaySquares(renderTheseSquares);
 }
 
+boolean sketchFullScreen() 
+{
+  return true;
+}
