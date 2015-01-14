@@ -3,7 +3,7 @@ void SongScript ()
 {
     // sound file names, which need to be mp3 within same folder
     Sound blinkNoise = new Sound("silence_test");
-    Sound stepNoise = new Sound("clickBig");
+    Sound stepNoise = new Sound("click");
     Sound startEndNoise = new Sound("silence_test");
     
     // create the grid, without customizing sounds for each cell or square yet
