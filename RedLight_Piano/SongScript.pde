@@ -36,6 +36,7 @@ void SongScript ()
     // add that one square to a list, which will contain many
     renderTheseSquares.add(square);
     
+    /*
     // then the second square
     square = new Square(
       new GridCell(6, 3),
@@ -60,4 +61,5 @@ void SongScript ()
     renderTheseSquares.add( new Square(new GridCell(0, 0),  new GridCell(0, 5), 4, mainGrid, stepNoise, 10, null) );
     square = new Square(new GridCell(0, 5),  new GridCell(0, 0), 3, mainGrid, 14); renderTheseSquares.add(square);
     square = new Square(new GridCell(0, 0),  new GridCell(0, 0), 8, mainGrid, 17); square.blink = blink2del3sec; renderTheseSquares.add(square); // simulate hold
+    */
 }
