@@ -2,9 +2,9 @@
 void SongScript ()
 {
     // sound file names, which need to be mp3 within same folder
-    Sound blinkNoise = new Sound("silence_test");
-    Sound stepNoise = new Sound("click");
-    Sound startEndNoise = new Sound("silence_test");
+    Sound blinkNoise = new Sound("blood_hit");
+    Sound stepNoise = new Sound("blood_splat");
+    Sound startEndNoise = new Sound("Hadouken");
     
     // create the grid, without customizing sounds for each cell or square yet
     for (int x = 0; x < 7; x++)
@@ -36,7 +36,6 @@ void SongScript ()
     // add that one square to a list, which will contain many
     renderTheseSquares.add(square);
     
-   /*
     // then the second square
     square = new Square(
       new GridCell(6, 3),
@@ -61,5 +60,4 @@ void SongScript ()
     renderTheseSquares.add( new Square(new GridCell(0, 0),  new GridCell(0, 5), 4, mainGrid, stepNoise, 10, null) );
     square = new Square(new GridCell(0, 5),  new GridCell(0, 0), 3, mainGrid, 14); renderTheseSquares.add(square);
     square = new Square(new GridCell(0, 0),  new GridCell(0, 0), 8, mainGrid, 17); square.blink = blink2del3sec; renderTheseSquares.add(square); // simulate hold
- */  
 }

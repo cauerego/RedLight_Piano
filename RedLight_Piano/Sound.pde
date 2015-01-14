@@ -8,7 +8,7 @@ class Sound
     {
         source = cSource;
         duration = cDuration;
-        player = minim.loadFile(source + ".aif");
+        player = minim.loadFile(source + ".mp3");
     }
 
     Sound (String cSource) { Initialize(cSource, -1); }
