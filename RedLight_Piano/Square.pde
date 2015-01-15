@@ -111,7 +111,7 @@ class Square
         // applying lastCell verification
         if (lastCell != null && pos.dist(lastCell.pos) > 0)
         {
-            if (lastCell.sound != null) lastCell.sound.player.rewind();
+            if (lastCell.sound != null) lastCell.sound.Rewind();
         }
         lastCell = new GridCell(pos.x, pos.y);
         lastCell.sound = sound;
@@ -119,7 +119,7 @@ class Square
         // finally play sound if available
         if (sound != null)
         {
-            sound.player.play();
+            sound.Play();
         }
     }
 }
