@@ -9,7 +9,7 @@ Minim minim;
 AudioPlayer player;
 
 int i;
-int speed = 10;
+int speed = 60; // frames
 
 void setup()
 {
@@ -25,26 +25,26 @@ void draw()
   noStroke();
   
   
+  if (i == 1)
+  {
+    player.play();
+  }
   if (i < speed)
   {
     fill(255, 0, 0);
-    rect(width/2, height/2, 50, 50);
-    player.play();
-    player.rewind();
-    player.pause();
-    player.rewind();
-    
-    
   }
   if (i > speed)
   {
     fill(0);
-    rect(width/2, height/2, 50, 50);
-    
   }
   if (i > speed*2)
   {
     i = 0;   
+    player.rewind();
+  }
+  else
+  {
+    rect(width/2, height/2, 50, 50);
   }
   i++;
 }
@@ -52,5 +52,3 @@ void draw()
 void stop() {
   super.stop();
 }
-
-
