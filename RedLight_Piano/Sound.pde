@@ -9,10 +9,10 @@ class Sound
     {
         source = cSource;
         duration = cDuration;
-        player = minim.loadFile(source + ".mp3");
+        player = minim.loadFile(source);
     }
 
-    Sound (String cSource) { Initialize(cSource, -1); }
+    Sound (String cSource) { Initialize(cSource, duration); }
     
     Sound (String cSource, float cDuration)
     {

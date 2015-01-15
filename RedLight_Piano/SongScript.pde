@@ -2,9 +2,9 @@
 void SongScript ()
 {
     // sound file names, which need to be mp3 within same folder
-    Sound blinkNoise = new Sound("blood_hit");
-    Sound stepNoise = new Sound("blood_splat");
-    Sound startEndNoise = new Sound("Hadouken");
+    Sound blinkNoise = new Sound("blood_hit.mp3");
+    Sound stepNoise = new Sound("blood_splat.mp3");
+    Sound startEndNoise = new Sound("Hadouken.mp3");
     
     // create the grid, without customizing sounds for each cell or square yet
     for (int x = 0; x < 7; x++)
