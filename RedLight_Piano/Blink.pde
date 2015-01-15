@@ -1,3 +1,5 @@
+// to-do: make it simpler to read and understand
+
 class Blink
 {
     int bpm;
