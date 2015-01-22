@@ -2,9 +2,9 @@
 void SongScript ()
 {
     // sound file names, which need to be mp3 within same folder
-    Sound blinkNoise = new Sound("blood_hit.mp3");
-    Sound stepNoise = new Sound("blood_splat.mp3");
-    Sound startEndNoise = new Sound("Hadouken.mp3");
+    Sound blinkNoise = new Sound("silence_test.aif");
+    Sound stepNoise = new Sound("bip.aif");
+    Sound startEndNoise = new Sound("silence_test.aif");
     
     // create the grid, without customizing sounds for each cell or square yet
     for (int x = 0; x < 7; x++)
@@ -26,38 +26,147 @@ void SongScript ()
     
     Square square;
     
-    // create first square with a different sound on start
+    LBF(0);
+    oneBF(1);
+    twoBF(2);
+    threeBF(3);
+    fourBF(4);
+    fiveBF(5);
+    RBF(6);
+}
+
+
+void LBF(int starttime)
+{
+   // sound file names, which need to be mp3 within same folder
+    Sound blinkNoise = new Sound("silence_test.aif");
+    Sound stepNoise = new Sound("bip.aif");
+    Sound startEndNoise = new Sound("silence_test.aif");
+    
+    Blink blink120bpm = new Blink(120, blinkNoise);
+    Blink blink2del3sec = new Blink(240, 2, 3);
+    
+    Square square;
+    
+    
+   // LEFT Back to Front Fast
     square = new Square();
-    square.start = new GridCell(0, 0, startEndNoise);
-    square.end = new GridCell(0, 10);
-    square.duration = 5;
+    square.start = new GridCell(0, 31, startEndNoise);
+    square.end = new GridCell(0, 0);
+    square.duration = 1;
     square.grid = mainGrid;
-    square.delay = 0;
+    square.delay = starttime;
     // add that one square to a list, which will contain many
     renderTheseSquares.add(square);
+}
+
+
+void oneBF(int starttime)
+{
+ // sound file names, which need to be mp3 within same folder
+    Sound blinkNoise = new Sound("silence_test.aif");
+    Sound stepNoise = new Sound("bip.aif");
+    Sound startEndNoise = new Sound("silence_test.aif");
     
-    // then the second square
+    Blink blink120bpm = new Blink(120, blinkNoise);
+    Blink blink2del3sec = new Blink(240, 2, 3);
+    
+    Square square;
+        
+  // 1 Back to Front Fast
     square = new Square(
-      new GridCell(6, 3),
-      new GridCell(6, 12),
-      10,
+      new GridCell(1, 19),
+      new GridCell(1, 0),
+      1,
       mainGrid,
-      1);
+      starttime);
     square.blink = blink120bpm;
     renderTheseSquares.add(square);
+}
+
+void twoBF(int starttime)
+{
+   // sound file names, which need to be mp3 within same folder
+    Sound blinkNoise = new Sound("silence_test.aif");
+    Sound stepNoise = new Sound("bip.aif");
+    Sound startEndNoise = new Sound("silence_test.aif");
     
-    // and so on
+    Blink blink120bpm = new Blink(120, blinkNoise);
+    Blink blink2del3sec = new Blink(240, 2, 3);
+    
+    Square square;
+    
+    // 2 Back to Front Fast
     square = new Square();
     square.grid = mainGrid;
     square.grid.SetSound(null);
-    square.start = new GridCell(3, 0);
-    square.end = new GridCell(5, 6, startEndNoise);
-    square.duration = 2;
+    square.start = new GridCell(2, 19);
+    square.end = new GridCell(2, 0, startEndNoise);
+    square.duration = 1;
+    square.delay = starttime;
     renderTheseSquares.add(square);
-    
-    // 4 more squares to continue the path from the first one, made in different possible ways
-    renderTheseSquares.add( new Square(new GridCell(0, 10), new GridCell(0, 0), 5, mainGrid, stepNoise, 5, null) );
-    renderTheseSquares.add( new Square(new GridCell(0, 0),  new GridCell(0, 5), 4, mainGrid, stepNoise, 10, null) );
-    square = new Square(new GridCell(0, 5),  new GridCell(0, 0), 3, mainGrid, 14); renderTheseSquares.add(square);
-    square = new Square(new GridCell(0, 0),  new GridCell(0, 0), 8, mainGrid, 17); square.blink = blink2del3sec; renderTheseSquares.add(square); // simulate hold
 }
+
+void threeBF(int starttime)
+{
+  // sound file names, which need to be mp3 within same folder
+    Sound blinkNoise = new Sound("silence_test.aif");
+    Sound stepNoise = new Sound("bip.aif");
+    Sound startEndNoise = new Sound("silence_test.aif");
+    
+    Blink blink120bpm = new Blink(120, blinkNoise);
+    Blink blink2del3sec = new Blink(240, 2, 3);
+    
+    Square square; 
+  
+  // 3 Back to Front Fast
+    renderTheseSquares.add( new Square(new GridCell(3, 19), new GridCell(3, 0), 1, mainGrid, stepNoise, starttime, null) );
+}
+
+void fourBF(int starttime)
+{
+  // sound file names, which need to be mp3 within same folder
+    Sound blinkNoise = new Sound("silence_test.aif");
+    Sound stepNoise = new Sound("bip.aif");
+    Sound startEndNoise = new Sound("silence_test.aif");
+    
+    Blink blink120bpm = new Blink(120, blinkNoise);
+    Blink blink2del3sec = new Blink(240, 2, 3);
+    
+    Square square; 
+  // 4 Back to Front Fast
+    renderTheseSquares.add( new Square(new GridCell(4, 19),  new GridCell(4, 0), 1, mainGrid, stepNoise, starttime, null) );
+}
+
+void fiveBF(int starttime)
+{
+  // sound file names, which need to be mp3 within same folder
+    Sound blinkNoise = new Sound("silence_test.aif");
+    Sound stepNoise = new Sound("bip.aif");
+    Sound startEndNoise = new Sound("silence_test.aif");
+    
+    Blink blink120bpm = new Blink(120, blinkNoise);
+    Blink blink2del3sec = new Blink(240, 2, 3);
+    
+    Square square; 
+  
+  // 5 Back to Front Fast
+    square = new Square(new GridCell(5, 19),  new GridCell(5, 0), 1, mainGrid, starttime); renderTheseSquares.add(square);
+}
+
+void RBF(int starttime)
+{
+  // sound file names, which need to be mp3 within same folder
+    Sound blinkNoise = new Sound("silence_test.aif");
+    Sound stepNoise = new Sound("bip.aif");
+    Sound startEndNoise = new Sound("silence_test.aif");
+    
+    Blink blink120bpm = new Blink(120, blinkNoise);
+    Blink blink2del3sec = new Blink(240, 2, 3);
+    
+    Square square; 
+    
+    // RIGHT Back to Front Fast
+    square = new Square(new GridCell(6, 31),  new GridCell(6, 0), 1, mainGrid, starttime); renderTheseSquares.add(square); // simulate hold
+}
+
