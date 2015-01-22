@@ -32,7 +32,7 @@ void SongScript ()
     square.end = new GridCell(0, 10);
     square.duration = 5;
     square.grid = mainGrid;
-    square.delay = 0;
+    square.startTime = 0;
     // add that one square to a list, which will contain many
     renderTheseSquares.add(square);
     
