@@ -3,15 +3,16 @@ class Square
     // properties
     GridCell start; // position and sound
     GridCell end;
-    float duration; // how long the square will be on, in seconds
+    float duration = 0; // how long the square will be on, in seconds
     Grid grid;
-    float delay; // how long to hold before displaying the square at first, in seconds
+    float startTime = 0; // how long to hold before displaying the square at first, in seconds
     Blink blink;
 //    Opacity opacity;
     
     // variables
     
-    private float startTime;
+    private Square previousSquare; 
+    private float initialized;
     private PVector pos;
     private PVector floatPos;
     private GridCell lastCell; // just so we know we moved to a new cell and we can rewind the sound
@@ -20,8 +21,12 @@ class Square
     
     private void Initialize ()
     {
-        startTime = millis();
+        initialized = millis();
         blink = null;
+        if (startTime < 0)
+        {
+            startTime = previousSquare.startTime + previousSquare.duration; // make it start right after the last time
+        }
     }
     
     // minimum needed
@@ -36,11 +41,11 @@ class Square
     
     // maximum possible
     private void Initialize (GridCell cStart, GridCell cEnd, float cDuration, Grid cGrid,
-      Sound setGridSound, float cDelay, Blink cBlink)
+      Sound setGridSound, float cStartTime, Blink cBlink)
     {
+        startTime = cStartTime;
         Initialize(cStart, cEnd, cDuration, cGrid);
         grid.SetSound(setGridSound);
-        delay = cDelay;
         blink = cBlink;
     }
     
@@ -51,20 +56,45 @@ class Square
         Initialize(cStart, cEnd, cDuration, cGrid);
     }
     
-    Square (GridCell cStart, GridCell cEnd, float cDuration, Grid cGrid, float cDelay)
+    Square (GridCell cStart, GridCell cEnd, float cDuration, Grid cGrid, float cStartTime)
     {
-        Initialize(cStart, cEnd, cDuration, cGrid, null, cDelay, null);
+        Initialize(cStart, cEnd, cDuration, cGrid, null, cStartTime, null);
     }
     
-    Square (GridCell cStart, GridCell cEnd, float cDuration, Grid cGrid, float cDelay, Blink cBlink)
+    Square (GridCell cStart, GridCell cEnd, float cDuration, Grid cGrid, float cStartTime, Blink cBlink)
     {
-        Initialize(cStart, cEnd, cDuration, cGrid, null, cDelay, cBlink);
+        Initialize(cStart, cEnd, cDuration, cGrid, null, cStartTime, cBlink);
     }
     
     Square (GridCell cStart, GridCell cEnd, float cDuration, Grid cGrid,
-      Sound setGridSound, float cDelay, Blink cBlink)
+      Sound setGridSound, float cStartTime, Blink cBlink)
     {
-        Initialize(cStart, cEnd, cDuration, cGrid, setGridSound, cDelay, cBlink);
+        Initialize(cStart, cEnd, cDuration, cGrid, setGridSound, cStartTime, cBlink);
+    }
+    
+    private void Initialize (Square oldSquare)
+    {
+        previousSquare = oldSquare;
+        startTime = -1;
+    }
+    
+    Square (Square oldSquare, float cDuration, Blink cBlink)
+    {
+        Initialize(oldSquare);
+        Initialize(previousSquare.end, previousSquare.end, cDuration, previousSquare.grid, null, -1, cBlink);
+    }
+    
+    Square (Square oldSquare, GridCell cEnd, float cDuration, Grid cGrid)
+    {
+        Initialize(oldSquare);
+        Initialize(previousSquare.end, cEnd, cDuration, cGrid);
+    }
+    
+    Square (Square oldSquare, GridCell cEnd, float cDuration, Grid cGrid,
+      Sound setGridSound, float cStartTime, Blink cBlink)
+    {
+        Initialize(oldSquare);
+        Initialize(previousSquare.end, cEnd, cDuration, cGrid, setGridSound, cStartTime, cBlink);
     }
     
     // methods
@@ -76,12 +106,12 @@ class Square
         float dur = duration * 1000;
         
         // normalized initial time
-        float norm = millis() - (startTime + (delay * 1000));
+        float norm = millis() - (initialized + (startTime * 1000));
         float ammt = norm / dur;
         
         if (norm >= 0 && norm < dur)
         {
-            //int steps = int( norm % (stepDelay * 1000) );
+            //int steps = int( norm % (stepStartTime * 1000) );
             //print(start, end, ammt, int(lerp(start.x, end.x, ammt)));
             
             pos = new PVector();
@@ -125,12 +155,12 @@ class Square
 }
 
 // made as public function because couldn't be made as a static method inside class Square
-public void DisplaySquares (ArrayList squares)
+public void DisplaySquares (ArrayList displaySquares)
 {
-    for (int i = 0; i < squares.size(); i++)
+    for (int i = 0; i < displaySquares.size(); i++)
         {
-        Square square = (Square) squares.get(i);
-        square.Display();
+        Square displaySquare = (Square) displaySquares.get(i);
+        displaySquare.Display();
     }
 }
 

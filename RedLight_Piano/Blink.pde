@@ -3,7 +3,7 @@
 class Blink
 {
     int bpm;
-    float delay;
+    float startTime;
     float duration;
     float blinkAmmt; // from 0 to 1, ammount spent in each blinking state
     Sound sound;
@@ -13,22 +13,22 @@ class Blink
     {
         Initialize(cBpm, 0, -1, 0.5, cSound);
     }
-    Blink (int cBpm, float cDelay, float cDuration)
+    Blink (int cBpm, float cStartTime, float cDuration)
     {
-        Initialize(cBpm, cDelay, cDuration, 0.5, null);
+        Initialize(cBpm, cStartTime, cDuration, 0.5, null);
     }
-    Blink (int cBpm, float cDelay, float cDuration, float cBlinkAmmt)
+    Blink (int cBpm, float cStartTime, float cDuration, float cBlinkAmmt)
     {
-        Initialize(cBpm, cDelay, cDuration, cBlinkAmmt, null);
+        Initialize(cBpm, cStartTime, cDuration, cBlinkAmmt, null);
     }
-    Blink (int cBpm, float cDelay, float cDuration, float cBlinkAmmt, Sound cSound)
+    Blink (int cBpm, float cStartTime, float cDuration, float cBlinkAmmt, Sound cSound)
     {
-        Initialize(cBpm, cDelay, cDuration, cBlinkAmmt, cSound);
+        Initialize(cBpm, cStartTime, cDuration, cBlinkAmmt, cSound);
     }
     
-    public void Initialize (int cBpm, float cDelay, float cDuration, float cBlinkAmmt, Sound cSound)
+    public void Initialize (int cBpm, float cStartTime, float cDuration, float cBlinkAmmt, Sound cSound)
     {
-        delay = cDelay * 1000;
+        startTime = cStartTime * 1000;
         duration = cDuration * 1000;
         bpm = cBpm;
         blinkAmmt = cBlinkAmmt;
@@ -39,9 +39,9 @@ class Blink
     {
         float interval = 60 * 1000 / bpm;
         
-        if (init <= delay) return true;
+        if (init <= startTime) return true;
         
-        if (duration > 0 && init >= duration + delay) return true;
+        if (duration > 0 && init >= duration + startTime) return true;
         
         if (norm(millis() % interval, 0, interval) > blinkAmmt)
         {
