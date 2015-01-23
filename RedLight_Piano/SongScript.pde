@@ -11,7 +11,9 @@ class SongScript
     Blink blink120bpm;// = new Blink(120, blinkNoise);
     Blink blink2del3sec;// = new Blink(240, 2, 3);
     
-    Square square;
+    Square square01;
+    Square square02;
+    Square square03;
     
     // supposed to be executed just once at setup()
     void Setup ()
@@ -39,46 +41,48 @@ class SongScript
         }
         
         // create first square with a different sound on start
-        square = new Square();
-        square.start = new GridCell(0, 0, startEndNoise);
-        square.end = new GridCell(0, 10);
-        square.duration = 5;
-        square.grid = mainGrid;
-        square.startTime = 0;
+        square01 = new Square();
+        square01.start = new GridCell(0, 0, startEndNoise);
+        square01.end = new GridCell(0, 10);
+        square01.duration = 5;
+        square01.grid = mainGrid;
+        square01.startTime = 0;
         // add that one square to a list, which will contain many
-        renderTheseSquares.add(square);
+        renderTheseSquares.add(square01);
         
         // then the second square
-        square = new Square(
+        square02 = new Square(
           new GridCell(6, 3),
           new GridCell(6, 12),
           10,
           mainGrid,
           1);
-        square.blink = blink120bpm;
-        renderTheseSquares.add(square);
+        square02.blink = blink120bpm;
+        renderTheseSquares.add(square02);
         
         // and so on
-        square = new Square();
-        square.grid = mainGrid;
-        square.grid.SetSound(null);
-        square.start = new GridCell(3, 0);
-        square.end = new GridCell(5, 6, startEndNoise);
-        square.duration = 2;
-        renderTheseSquares.add(square);
+        square03 = new Square();
+        square03.grid = mainGrid;
+        square03.grid.SetSound(null);
+        square03.start = new GridCell(3, 0);
+        square03.end = new GridCell(5, 6, startEndNoise);
+        square03.duration = 2;
+        renderTheseSquares.add(square03);
         
         // 4 more squares to continue the path from the first one, made in different possible ways
-        fourMoreSquares(0);
+        fourMoreSquaresOn01();
         
         // repeat at will
-        fourMoreSquares(25); // 17 + 8 from the last line
+        renderTheseSquares.add( square01 = new Square(square01, 1, null) ); // hold latest position, with no blink, for 1 second duration
+        renderTheseSquares.add( square01 = new Square(square01, new GridCell(0, 10), 3, mainGrid) ); // fourMoreSquares doesn't have the first "step"
+        fourMoreSquaresOn01();
     }
     
-    void fourMoreSquares (float startTime)
+    void fourMoreSquaresOn01 ()
     {
-        renderTheseSquares.add( new Square(new GridCell(0, 10), new GridCell(0, 0), 5, mainGrid, stepNoise, startTime + 5, null) );
-        renderTheseSquares.add( new Square(new GridCell(0, 0),  new GridCell(0, 5), 4, mainGrid, stepNoise, startTime + 10, null) );
-        square = new Square(new GridCell(0, 5),  new GridCell(0, 0), 3, mainGrid, startTime + 14); renderTheseSquares.add(square);
-        square = new Square(new GridCell(0, 0),  new GridCell(0, 0), 8, mainGrid, startTime + 17); square.blink = blink2del3sec; renderTheseSquares.add(square); // simulate hold
+        renderTheseSquares.add( square01 = new Square(square01, new GridCell(0, 0), 5, mainGrid, stepNoise, -1, null) );
+        renderTheseSquares.add( square01 = new Square(square01, new GridCell(0, 5), 4, mainGrid, stepNoise, -1, null) );
+        square01 = new Square(square01, new GridCell(0, 0), 3, mainGrid); renderTheseSquares.add(square01);
+        square01 = new Square(square01, 8, null); square01.blink = blink2del3sec; renderTheseSquares.add(square01); // simulate hold, with blink
     }
 }

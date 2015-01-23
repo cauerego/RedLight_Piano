@@ -3,14 +3,15 @@ class Square
     // properties
     GridCell start; // position and sound
     GridCell end;
-    float duration; // how long the square will be on, in seconds
+    float duration = 0; // how long the square will be on, in seconds
     Grid grid;
-    float startTime; // how long to hold before displaying the square at first, in seconds
+    float startTime = 0; // how long to hold before displaying the square at first, in seconds
     Blink blink;
 //    Opacity opacity;
     
     // variables
     
+    private Square previousSquare; 
     private float initialized;
     private PVector pos;
     private PVector floatPos;
@@ -22,6 +23,10 @@ class Square
     {
         initialized = millis();
         blink = null;
+        if (startTime < 0)
+        {
+            startTime = previousSquare.startTime + previousSquare.duration; // make it start right after the last time
+        }
     }
     
     // minimum needed
@@ -38,9 +43,9 @@ class Square
     private void Initialize (GridCell cStart, GridCell cEnd, float cDuration, Grid cGrid,
       Sound setGridSound, float cStartTime, Blink cBlink)
     {
+        startTime = cStartTime;
         Initialize(cStart, cEnd, cDuration, cGrid);
         grid.SetSound(setGridSound);
-        startTime = cStartTime;
         blink = cBlink;
     }
     
@@ -65,6 +70,31 @@ class Square
       Sound setGridSound, float cStartTime, Blink cBlink)
     {
         Initialize(cStart, cEnd, cDuration, cGrid, setGridSound, cStartTime, cBlink);
+    }
+    
+    private void Initialize (Square oldSquare)
+    {
+        previousSquare = oldSquare;
+        startTime = -1;
+    }
+    
+    Square (Square oldSquare, float cDuration, Blink cBlink)
+    {
+        Initialize(oldSquare);
+        Initialize(previousSquare.end, previousSquare.end, cDuration, previousSquare.grid, null, -1, cBlink);
+    }
+    
+    Square (Square oldSquare, GridCell cEnd, float cDuration, Grid cGrid)
+    {
+        Initialize(oldSquare);
+        Initialize(previousSquare.end, cEnd, cDuration, cGrid);
+    }
+    
+    Square (Square oldSquare, GridCell cEnd, float cDuration, Grid cGrid,
+      Sound setGridSound, float cStartTime, Blink cBlink)
+    {
+        Initialize(oldSquare);
+        Initialize(previousSquare.end, cEnd, cDuration, cGrid, setGridSound, cStartTime, cBlink);
     }
     
     // methods
