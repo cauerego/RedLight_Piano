@@ -3,6 +3,7 @@ Minim minim; // for sound
 
 ArrayList renderTheseSquares = new ArrayList();
 
+SongScript songScript = new SongScript();
 Grid mainGrid = new Grid();
 
 void setup ()
@@ -12,7 +13,7 @@ void setup ()
     
     mainGrid.cellSize = new PVector(10, 10);
     
-    SongScript();
+    songScript.Setup();
 }
 
 void draw ()
