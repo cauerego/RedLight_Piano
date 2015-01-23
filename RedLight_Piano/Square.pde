@@ -125,12 +125,12 @@ class Square
 }
 
 // made as public function because couldn't be made as a static method inside class Square
-public void DisplaySquares (ArrayList squares)
+public void DisplaySquares (ArrayList displaySquares)
 {
-    for (int i = 0; i < squares.size(); i++)
+    for (int i = 0; i < displaySquares.size(); i++)
         {
-        Square square = (Square) squares.get(i);
-        square.Display();
+        Square displaySquare = (Square) displaySquares.get(i);
+        displaySquare.Display();
     }
 }
 
