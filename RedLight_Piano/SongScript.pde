@@ -70,16 +70,20 @@ class SongScript
         renderTheseSquares.add(square03);
         
         // 4 more squares to continue the path from the first one, made in different possible ways
-        fourMoreSquaresOn01();
+        fourMoreSquaresOn01(0);
         
         // repeat at will
         renderTheseSquares.add( square01 = new Square(square01, 1, null) ); // hold latest position, with no blink, for 1 second duration
-        renderTheseSquares.add( square01 = new Square(square01, new GridCell(0, 10), 3, mainGrid) ); // fourMoreSquares doesn't have the first "step"
-        fourMoreSquaresOn01();
+        fourMoreSquaresOn01(1);
     }
     
-    void fourMoreSquaresOn01 ()
+    void fourMoreSquaresOn01 (int include)
     {
+        if (include > 0)
+        {
+            // to ignore the first step on the first run - this one have no start sound and goes faster
+            renderTheseSquares.add( square01 = new Square(square01, new GridCell(0, 10), 3, mainGrid) );
+        }
         renderTheseSquares.add( square01 = new Square(square01, new GridCell(0, 0), 5, mainGrid, stepNoise, -1, null) );
         renderTheseSquares.add( square01 = new Square(square01, new GridCell(0, 5), 4, mainGrid, stepNoise, -1, null) );
         square01 = new Square(square01, new GridCell(0, 0), 3, mainGrid); renderTheseSquares.add(square01);
