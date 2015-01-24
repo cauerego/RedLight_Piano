@@ -11,19 +11,17 @@ class SongScript
     Blink blink120bpm;// = new Blink(120, blinkNoise);
     Blink blink2del3sec;// = new Blink(240, 2, 3);
     
-    Square square01;
-    Square square02;
-    Square square03;
+    Square[] square = new Square[2];
     
     // supposed to be executed just once at setup()
     void Setup ()
     {
-        blinkNoise = new Sound("blood_hit.mp3");
-        stepNoise = new Sound("blood_splat.mp3");
-        startEndNoise = new Sound("Hadouken.mp3");
+        blinkNoise = new Sound("bip.aif");
+        stepNoise = new Sound("bip.aif");
+        startEndNoise = new Sound("bip.aif");
         
-        blink120bpm = new Blink(120, blinkNoise);
-        blink2del3sec = new Blink(240, 2, 3);
+        blink120bpm = new Blink(480, blinkNoise);
+        blink2del3sec = new Blink(240, 16, 3);
         
         // create the grid, without customizing sounds for each cell or square yet
         for (int x = 0; x < 7; x++)
@@ -40,53 +38,106 @@ class SongScript
             }
         }
         
-        // create first square with a different sound on start
-        square01 = new Square();
-        square01.start = new GridCell(0, 0, startEndNoise);
-        square01.end = new GridCell(0, 10);
-        square01.duration = 5;
-        square01.grid = mainGrid;
-        square01.startTime = 0;
-        // add that one square to a list, which will contain many
-        renderTheseSquares.add(square01);
         
-        // then the second square
-        square02 = new Square(
-          new GridCell(6, 3),
-          new GridCell(6, 12),
-          10,
-          mainGrid,
-          1);
-        square02.blink = blink120bpm;
-        renderTheseSquares.add(square02);
+        // All Rows Back to Front
+        for(int i = 0; i < 7; i++)
+        {
+          if(i > 0 && i < 6)
+          {
+ // rowMove ->> starttime, colNumber, startRow, endRow, duration
+            rowMove(i,i,18,0,1);
+          }
+          else
+          {
+          rowMove(i,i,30,0,1);
+          }
+        }
         
-        // and so on
-        square03 = new Square();
-        square03.grid = mainGrid;
-        square03.grid.SetSound(null);
-        square03.start = new GridCell(3, 0);
-        square03.end = new GridCell(5, 6, startEndNoise);
-        square03.duration = 2;
-        renderTheseSquares.add(square03);
+         // All Columns Bouncing  
+ // collumnBounce ->> starttime, colNumber, startRow, endRow, duration
+        collumnBounce(7, 0, 31, 0, 1);
+        collumnBounce(9, 1, 19, 0, 1);
+        collumnBounce(11,2, 19, 0, 1);
+        collumnBounce(13,3, 19, 0, 1);
+        collumnBounce(15,4, 19, 0, 1);
+        collumnBounce(17,5, 19, 0, 1); 
+        collumnBounce(19,6, 31, 0, 1);
         
-        // 4 more squares to continue the path from the first one, made in different possible ways
-        fourMoreSquaresOn01(0);
+        // Squares Blinking on First Collumn
+  //squareBlink =>> starttime, col, row, duration     
+        for(float i = 21; i< 31; i +=1)
+        {
+          squareBlink(i,0,int(i-21),0.2);
+        }
         
-        // repeat at will
-        renderTheseSquares.add( square01 = new Square(square01, 1, null) ); // hold latest position, with no blink, for 1 second duration
-        fourMoreSquaresOn01(1);
+        // Squares Blinking on Third Collumn
+        
+        for(float i = 31; i< 41; i +=0.5)
+        {
+          squareBlink(i,2,int(i-27),0.2);
+        }
+        
+        // All squares blinking
+   //allsquareBlink ==>> starttime, duration
+       allsquareBlink(41,5);
+        
+        //squareHold();
+   //squareHold ==>> starttime, col, row, duration
+       squareHold(46, 0, 0, 5);
+       squareHold(51, 5, 5, 5);
+       squareHold(55, 6, 20, 5);
+      
+       
+        //allsquareHold(); 
+    //allsquareHold ==>> starttime, duration
+        allsquareHold(59,5);
+
+    
     }
     
-    void fourMoreSquaresOn01 (int include)
+    void rowMove(float starttime, int colNumber, int startRow, int endRow, float duration)
     {
-        if (include > 0)
-        {
-            // to ignore the first step on the first run - this one have no start sound and goes faster
-            renderTheseSquares.add( square01 = new Square(square01, new GridCell(0, 10), 3, mainGrid) );
-        }
-        renderTheseSquares.add( square01 = new Square(square01, new GridCell(0, 0), 5, mainGrid, stepNoise, -1, null) );
-        renderTheseSquares.add( square01 = new Square(square01, new GridCell(0, 5), 4, mainGrid, stepNoise, -1, null) );
-        square01 = new Square(square01, new GridCell(0, 0), 3, mainGrid); renderTheseSquares.add(square01);
-        square01 = new Square(square01, 8, null); square01.blink = blink2del3sec; renderTheseSquares.add(square01); // simulate hold, with blink
+      square[01] = new Square(new GridCell(colNumber,startRow), new GridCell(colNumber,endRow), duration, mainGrid, stepNoise, starttime, null); renderTheseSquares.add(square[01]);
     }
+    
+    void collumnBounce(float starttime, int colNumber, int startRow, int endRow, float duration)
+    {
+      square[01] = new Square(new GridCell(colNumber,startRow), new GridCell(colNumber,endRow), duration, mainGrid, stepNoise, starttime, null); renderTheseSquares.add(square[01]); 
+      square[01] = new Square(square[01], new GridCell(colNumber,startRow), duration, mainGrid); renderTheseSquares.add(square[01]);
+    }      
+      
+    void squareBlink(float starttime, int col, int row, float duration)
+    {
+      square[01] = new Square(new GridCell(col,row), new GridCell(col,row), duration, mainGrid, starttime); square[01].blink = blink120bpm; renderTheseSquares.add(square[01]);  
+    }
+    
+    void allsquareBlink (float startTime, float duration)
+    {
+        
+        // mostly copied from Grid.Display
+        for (int i = 0; i < mainGrid.cells.size(); i++)
+        //for (GridCell cell in cells)
+        {
+            GridCell cell = (GridCell) mainGrid.cells.get(i);
+            float col = cell.pos.x;
+            float row = cell.pos.y;
+            square[01] = new Square(new GridCell(col, row), new GridCell(col,row), duration, mainGrid, startTime); square[01].blink = blink120bpm; renderTheseSquares.add(square[01]);
+        }
+    }
+    
+    void squareHold(float starttime, int col, int row, float duration)
+    {
+      square[01] = new Square(new GridCell(col, row),  new GridCell(col, row), duration, mainGrid, starttime); square[01].blink = blink2del3sec; renderTheseSquares.add(square[01]);
+    }
+    
+    void allsquareHold(float starttime, float duartion)
+    {
+      for(int row = 0; row < 31; row++)
+      {
+        for(int col = 0; col < 7; col++)
+        {
+          square[01] = new Square(new GridCell(col, row), new GridCell(col,row), 10, mainGrid, starttime); square[01].blink = blink2del3sec; renderTheseSquares.add(square[01]);
+        }
+      }
+    }    
 }
