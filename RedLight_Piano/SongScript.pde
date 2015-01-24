@@ -111,15 +111,18 @@ class SongScript
       square[01] = new Square(new GridCell(col,row), new GridCell(col,row), duration, mainGrid, starttime); square[01].blink = blink120bpm; renderTheseSquares.add(square[01]);  
     }
     
-    void allsquareBlink(float starttime, float duration)
+    void allsquareBlink (float startTime, float duration)
     {
-      for(int row = 0; row < 31; row++)
-      {
-        for(int col = 0; col < 7; col++)
+        
+        // mostly copied from Grid.Display
+        for (int i = 0; i < mainGrid.cells.size(); i++)
+        //for (GridCell cell in cells)
         {
-          square[01] = new Square(new GridCell(col, row), new GridCell(col,row), duration, mainGrid, starttime); square[01].blink = blink120bpm; renderTheseSquares.add(square[01]);
+            GridCell cell = (GridCell) mainGrid.cells.get(i);
+            float col = cell.pos.x;
+            float row = cell.pos.y;
+            square[01] = new Square(new GridCell(col, row), new GridCell(col,row), duration, mainGrid, startTime); square[01].blink = blink120bpm; renderTheseSquares.add(square[01]);
         }
-      }
     }
     
     void squareHold(float starttime, int col, int row, float duration)
