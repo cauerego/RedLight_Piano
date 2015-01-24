@@ -44,7 +44,7 @@ class SongScript
         {
           if(i > 0 && i < 6)
           {
- // rowMove ->> colNumber, startRow, endRow, speed, starttime
+ // rowMove ->> starttime, colNumber, startRow, endRow, duration
             rowMove(i,i,18,0,1);
           }
           else
@@ -54,7 +54,7 @@ class SongScript
         }
         
          // All Columns Bouncing  
- // collumnBounce ->> starttime, colNumber, startRow, middlePoint, speed
+ // collumnBounce ->> starttime, colNumber, startRow, endRow, duration
         collumnBounce(7, 0, 31, 0, 1);
         collumnBounce(9, 1, 19, 0, 1);
         collumnBounce(11,2, 19, 0, 1);
@@ -95,15 +95,15 @@ class SongScript
     
     }
     
-    void rowMove(float starttime, int colNumber, int startRow, int endRow, float speed)
+    void rowMove(float starttime, int colNumber, int startRow, int endRow, float duration)
     {
-      square[01] = new Square(new GridCell(colNumber,startRow), new GridCell(colNumber,endRow), speed, mainGrid, stepNoise, starttime, null); renderTheseSquares.add(square[01]);
+      square[01] = new Square(new GridCell(colNumber,startRow), new GridCell(colNumber,endRow), duration, mainGrid, stepNoise, starttime, null); renderTheseSquares.add(square[01]);
     }
     
-    void collumnBounce(float starttime, int colNumber, int startRow, int middlePoint, float speed)
+    void collumnBounce(float starttime, int colNumber, int startRow, int endRow, float duration)
     {
-      square[01] = new Square(new GridCell(colNumber,startRow), new GridCell(colNumber,middlePoint), speed, mainGrid, stepNoise, starttime, null); renderTheseSquares.add(square[01]); 
-      square[01] = new Square(square[01], new GridCell(colNumber,startRow), speed, mainGrid); renderTheseSquares.add(square[01]);
+      square[01] = new Square(new GridCell(colNumber,startRow), new GridCell(colNumber,endRow), duration, mainGrid, stepNoise, starttime, null); renderTheseSquares.add(square[01]); 
+      square[01] = new Square(square[01], new GridCell(colNumber,startRow), duration, mainGrid); renderTheseSquares.add(square[01]);
     }      
       
     void squareBlink(float starttime, int col, int row, float duration)
