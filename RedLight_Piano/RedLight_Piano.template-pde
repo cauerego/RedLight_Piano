@@ -1,3 +1,11 @@
+// WARNING
+
+// KEEP IN MIND THIS FILE IS BEING IGNORED BY GIT
+
+// MAKE ANY CHANGES INTO THE TEMPLATE ONE !!
+
+
+
 import ddf.minim.*; // for sound
 Minim minim; // for sound
 
