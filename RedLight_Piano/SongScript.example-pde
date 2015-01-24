@@ -1,0 +1,92 @@
+// making this into a class so we can have arbitrary methods within it for repeating sequences
+// technically this is meant to create a scope, and remove possibilities of duplicated "global variables"
+// probably ideally this would be static class, but there's no need to change everything into static for now
+class SongScriptExample
+{
+    // sound file names, which need to be mp3 within same folder
+    Sound blinkNoise;// = new Sound("blood_hit.mp3");
+    Sound stepNoise;// = new Sound("blood_splat.mp3");
+    Sound startEndNoise;// = new Sound("Hadouken.mp3");
+    
+    Blink blink120bpm;// = new Blink(120, blinkNoise);
+    Blink blink2del3sec;// = new Blink(240, 2, 3);
+    
+    Square square01;
+    Square square02;
+    Square square03;
+    
+    // supposed to be executed just once at setup()
+    void Setup ()
+    {
+        blinkNoise = new Sound("blood_hit.mp3");
+        stepNoise = new Sound("blood_splat.mp3");
+        startEndNoise = new Sound("Hadouken.mp3");
+        
+        blink120bpm = new Blink(120, blinkNoise);
+        blink2del3sec = new Blink(240, 2, 3);
+        
+        // create the grid, without customizing sounds for each cell or square yet
+        for (int x = 0; x < 7; x++)
+        {
+            for (int y = 0; y < 31; y++)
+            {
+                if (x == 0 || x == 6 || y < 19)
+                {
+                    // here, each cell could have a different sound
+                    Sound sound = stepNoise; // but we'll just leave a default sound for all cells for now
+                    GridCell cell = new GridCell(x, y, sound);
+                    mainGrid.Add(cell);
+                }
+            }
+        }
+        
+        // create first square with a different sound on start
+        square01 = new Square();
+        square01.start = new GridCell(0, 0, startEndNoise);
+        square01.end = new GridCell(0, 10);
+        square01.duration = 5;
+        square01.grid = mainGrid;
+        square01.startTime = 0;
+        // add that one square to a list, which will contain many
+        renderTheseSquares.add(square01);
+        
+        // then the second square
+        square02 = new Square(
+          new GridCell(6, 3),
+          new GridCell(6, 12),
+          10,
+          mainGrid,
+          1);
+        square02.blink = blink120bpm;
+        renderTheseSquares.add(square02);
+        
+        // and so on
+        square03 = new Square();
+        square03.grid = mainGrid;
+        square03.grid.SetSound(null);
+        square03.start = new GridCell(3, 0);
+        square03.end = new GridCell(5, 6, startEndNoise);
+        square03.duration = 2;
+        renderTheseSquares.add(square03);
+        
+        // 4 more squares to continue the path from the first one, made in different possible ways
+        fourMoreSquaresOn01(0);
+        
+        // repeat at will
+        renderTheseSquares.add( square01 = new Square(square01, 1, null) ); // hold latest position, with no blink, for 1 second duration
+        fourMoreSquaresOn01(1);
+    }
+    
+    void fourMoreSquaresOn01 (int include)
+    {
+        if (include > 0)
+        {
+            // to ignore the first step on the first run - this one have no start sound and goes faster
+            renderTheseSquares.add( square01 = new Square(square01, new GridCell(0, 10), 3, mainGrid) );
+        }
+        renderTheseSquares.add( square01 = new Square(square01, new GridCell(0, 0), 5, mainGrid, stepNoise, -1, null) );
+        renderTheseSquares.add( square01 = new Square(square01, new GridCell(0, 5), 4, mainGrid, stepNoise, -1, null) );
+        square01 = new Square(square01, new GridCell(0, 0), 3, mainGrid); renderTheseSquares.add(square01);
+        square01 = new Square(square01, 8, null); square01.blink = blink2del3sec; renderTheseSquares.add(square01); // simulate hold, with blink
+    }
+}
