@@ -37,12 +37,12 @@ class Blink
     
     public boolean Okay (float normTime)
     {
-        float interval = 60 / bpm;
+        float interval = 60 * 1000 / bpm;
         if (normTime < startTime) return true;
         
         if (duration > 0 && normTime > duration + startTime) return true;
         
-        if (norm(sTime % interval, 0, interval) > blinkAmmt)
+        if (norm((sTime * 1000) % interval, 0, interval) > blinkAmmt)
         {
             if (sound != null) sound.Play();
             return true;
