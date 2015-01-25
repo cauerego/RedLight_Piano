@@ -20,8 +20,6 @@ class SongScript
     // supposed to be executed just once at setup()
     void Setup ()
     {
-        initialized = rMillis;
-        
         blinkNoise = new Sound("bip.aif");
         stepNoise = new Sound("bip.aif");
         startEndNoise = new Sound("bip.aif");
@@ -98,7 +96,7 @@ class SongScript
     //allsquareHold ==>> starttime, duration
         allsquareHold(59,5);
 
-    
+        initialized = rMillis;
     }
     
     // supposed to add squares into the rendering list on the fly, so this should be on draw()
