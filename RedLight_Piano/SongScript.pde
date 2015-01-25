@@ -14,7 +14,7 @@ class SongScript
     Square[] square = new Square[2];
     
     float initialized;
-    float simulatedMillis;
+    float simulatedTime;
     
     // PS: squaresList might easily become much bigger than it needed to be, due to sub optimal conventions here...
     ArrayList squaresList = new ArrayList();
@@ -46,7 +46,7 @@ class SongScript
         
         
         // All Rows Back to Front
-        simulatedMillis = rMillis / 1000.0;
+        simulatedTime = sTime;
         for(int i = 0; i < 7; i++)
         {
           if(i > 0 && i < 6)
@@ -62,7 +62,7 @@ class SongScript
         
          // All Columns Bouncing  
  // collumnBounce ->> colNumber, startRow, endRow, duration
-        //simulatedMillis = 7;
+        //simulatedTime = 7;
         collumnBounce(0, 31, 0, 2);
         collumnBounce(1, 19, 0, 2);
         collumnBounce(2, 19, 0, 2);
@@ -73,14 +73,14 @@ class SongScript
         
         // Squares Blinking on First Collumn
   //squareBlink =>> col, row, duration
-        //simulatedMillis = 21; 
+        //simulatedTime = 21; 
         for(int i = 0; i< 10; i +=1)
         {
           squareBlink(0,i,0.2);
         }
         
         // Squares Blinking on Third Collumn
-        simulatedMillis = 31;
+        simulatedTime = 31;
         for(int i = 0; i< 10; i +=0.5)
         {
           squareBlink(2,i+4,0.2);
@@ -88,12 +88,12 @@ class SongScript
         
         // All squares blinking
    //allsquareBlink ==>> duration
-       //simulatedMillis = 41;
+       //simulatedTime = 41;
        allsquareBlink(5);
         
         //squareHold();
    //squareHold ==>> col, row, duration
-       //simulatedMillis = 46;
+       //simulatedTime = 46;
        squareHold(0, 0, 5);
        squareHold(5, 5, 5);
        squareHold(6, 20, 5);
@@ -101,45 +101,45 @@ class SongScript
        
         //allsquareHold(); 
     //allsquareHold ==>> duration
-        //simulatedMillis = 59;
+        //simulatedTime = 59;
         allsquareHold(5);
 
-        initialized = rMillis;
+        initialized = sTime;
     }
     
     // supposed to add squares into the rendering list on the fly, so this should be on draw()
-    // PS: after adding this looks like the whole songscript is not starting at 1 rMillis anymore
+    // PS: after adding this looks like the whole songscript is not starting at 1 sTime anymore
     void CatchAndSetupEvents (char key)
     {
         if (key == 'A' || key == 'a')
         {
-            allsquareBlink( rMillis / 1000.0, 2);
+            allsquareBlink(sTime, 2);
         }
     }
     
     void rowMove(int colNumber, int startRow, int endRow, float duration)
     {
-      square[01] = new Square(new GridCell(colNumber,startRow), new GridCell(colNumber,endRow), duration, mainGrid, stepNoise, simulatedMillis, null); squaresList.add(square[01]);
-      simulatedMillis += duration;
+      square[01] = new Square(new GridCell(colNumber,startRow), new GridCell(colNumber,endRow), duration, mainGrid, stepNoise, simulatedTime, null); squaresList.add(square[01]);
+      simulatedTime += duration;
     }
     
     void collumnBounce(int colNumber, int startRow, int endRow, float duration)
     {
-      square[01] = new Square(new GridCell(colNumber,startRow), new GridCell(colNumber,endRow), duration / 2, mainGrid, stepNoise, simulatedMillis, null); squaresList.add(square[01]); 
+      square[01] = new Square(new GridCell(colNumber,startRow), new GridCell(colNumber,endRow), duration / 2, mainGrid, stepNoise, simulatedTime, null); squaresList.add(square[01]); 
       square[01] = new Square(square[01], new GridCell(colNumber,startRow), duration / 2, mainGrid); squaresList.add(square[01]);
-      simulatedMillis += duration;
+      simulatedTime += duration;
     }      
       
     void squareBlink(int col, int row, float duration)
     {
-      square[01] = new Square(new GridCell(col,row), new GridCell(col,row), duration, mainGrid, simulatedMillis); square[01].blink = blink120bpm; squaresList.add(square[01]);  
-      simulatedMillis += duration;
+      square[01] = new Square(new GridCell(col,row), new GridCell(col,row), duration, mainGrid, simulatedTime); square[01].blink = blink120bpm; squaresList.add(square[01]);  
+      simulatedTime += duration;
     }
     
     void allsquareBlink (float duration)
     {
-        allsquareBlink(simulatedMillis, duration);
-        simulatedMillis += duration * mainGrid.cells.size();
+        allsquareBlink(simulatedTime, duration);
+        simulatedTime += duration * mainGrid.cells.size();
     }
     void allsquareBlink (float startTime, float duration)
     {
@@ -157,8 +157,8 @@ class SongScript
     
     void squareHold(int col, int row, float duration)
     {
-      square[01] = new Square(new GridCell(col, row),  new GridCell(col, row), duration, mainGrid, simulatedMillis); square[01].blink = blink2del3sec; squaresList.add(square[01]);
-      simulatedMillis += duration;
+      square[01] = new Square(new GridCell(col, row),  new GridCell(col, row), duration, mainGrid, simulatedTime); square[01].blink = blink2del3sec; squaresList.add(square[01]);
+      simulatedTime += duration;
     }
     
     void allsquareHold(float duration)
@@ -167,8 +167,8 @@ class SongScript
       {
         for(int col = 0; col < 7; col++)
         {
-          square[01] = new Square(new GridCell(col, row), new GridCell(col,row), duration, mainGrid, simulatedMillis); square[01].blink = blink2del3sec; squaresList.add(square[01]);
-          simulatedMillis += duration;
+          square[01] = new Square(new GridCell(col, row), new GridCell(col,row), duration, mainGrid, simulatedTime); square[01].blink = blink2del3sec; squaresList.add(square[01]);
+          simulatedTime += duration;
         }
       }
     }    

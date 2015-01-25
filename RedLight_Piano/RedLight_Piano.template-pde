@@ -12,11 +12,13 @@ Minim minim; // for sound
 SongScript songScript = new SongScript();
 Grid mainGrid = new Grid();
 
-float rMillis = millis();
+// normalized millis into seconds and into same momment
+// for everything within each common event (setup, draw, etc)
+float sTime;
 
 void setup ()
 {
-    rMillis = millis();
+    sTime = millis() / 1000.0;
     
     size (200, 400);
     minim = new Minim(this); // for sound
@@ -28,7 +30,7 @@ void setup ()
 
 void draw ()
 {
-    rMillis = millis();
+    sTime = millis() / 1000.0;
     
     background(0);
     mainGrid.Display();

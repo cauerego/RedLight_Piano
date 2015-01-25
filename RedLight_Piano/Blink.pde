@@ -28,8 +28,8 @@ class Blink
     
     public void Initialize (int cBpm, float cStartTime, float cDuration, float cBlinkAmmt, Sound cSound)
     {
-        startTime = cStartTime * 1000;
-        duration = cDuration * 1000;
+        startTime = cStartTime;
+        duration = cDuration;
         bpm = cBpm;
         blinkAmmt = cBlinkAmmt;
         sound = cSound;
@@ -37,13 +37,13 @@ class Blink
     
     public boolean Okay (float init)
     {
-        float interval = 60 * 1000 / bpm;
+        float interval = 60 / bpm;
         
         if (init <= startTime) return true;
         
         if (duration > 0 && init >= duration + startTime) return true;
         
-        if (norm(rMillis % interval, 0, interval) > blinkAmmt)
+        if (norm(sTime % interval, 0, interval) > blinkAmmt)
         {
             if (sound != null) sound.Play();
             return true;

@@ -101,15 +101,15 @@ class Square
     {
         if (grid == null) return;
         
-        float dur = duration * 1000;
+        float dur = duration;
         
         // normalized initial time
-        float norm = rMillis - (initialized + (startTime * 1000.0));
+        float norm = sTime - (initialized + startTime);
         float ammt = norm / dur;
         
         if (norm >= 0 && norm < dur)
         {
-            //int steps = int( norm % (stepStartTime * 1000) );
+            //int steps = int( norm % (stepStartTime) );
             //print(start, end, ammt, int(lerp(start.x, end.x, ammt)));
             
             pos = new PVector();
@@ -161,7 +161,7 @@ public void Square_DisplaySquares (ArrayList displaySquares, float initialized)
         displaySquare.Display(initialized);
         
         // clean up squares that have already being done, to keep the display square list as short as possible
-        if (displaySquare.startTime + displaySquare.duration + 1 < rMillis / 1000.0)
+        if (displaySquare.startTime + displaySquare.duration + 1 < sTime)
         {
             displaySquares.remove(displaySquare);
         }
