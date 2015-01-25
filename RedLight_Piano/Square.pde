@@ -21,7 +21,7 @@ class Square
     
     private void Initialize ()
     {
-        initialized = millis();
+        initialized = rMillis;
         blink = null;
         if (startTime < 0)
         {
@@ -106,7 +106,7 @@ class Square
         float dur = duration * 1000;
         
         // normalized initial time
-        float norm = millis() - (initialized + (startTime * 1000));
+        float norm = rMillis - (initialized + (startTime * 1000.0));
         float ammt = norm / dur;
         
         if (norm >= 0 && norm < dur)

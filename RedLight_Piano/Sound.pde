@@ -26,10 +26,10 @@ class Sound
     
     void Play ()
     {
-        if (startedPlaying < 0 || millis() > startedPlaying + duration)
+        if (startedPlaying < 0 || rMillis > startedPlaying + duration)
         {
             player.play();
-            startedPlaying = millis();
+            startedPlaying = rMillis;
         }
     }
     

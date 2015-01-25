@@ -97,6 +97,15 @@ class SongScript
     
     }
     
+    // supposed to add squares into the rendering list on the fly, so this should be on draw()
+    void CatchAndSetupEvents (char key)
+    {
+        if (key == 'A' || key == 'a')
+        {
+            allsquareBlink( rMillis / 1000.0, 2);
+        }
+    }
+    
     void rowMove(float starttime, int colNumber, int startRow, int endRow, float duration)
     {
       square[01] = new Square(new GridCell(colNumber,startRow), new GridCell(colNumber,endRow), duration, mainGrid, stepNoise, starttime, null); renderTheseSquares.add(square[01]);

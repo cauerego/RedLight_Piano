@@ -12,8 +12,12 @@ Minim minim; // for sound
 SongScript songScript = new SongScript();
 Grid mainGrid = new Grid();
 
+float rMillis = millis();
+
 void setup ()
 {
+    rMillis = millis();
+    
     size (200, 400);
     minim = new Minim(this); // for sound
     
@@ -24,6 +28,8 @@ void setup ()
 
 void draw ()
 {
+    rMillis = millis();
+    
     background(0);
     mainGrid.Display();
     
@@ -31,3 +37,7 @@ void draw ()
     Square_DisplaySquares(songScript.renderTheseSquares);
 }
 
+void keyPressed ()
+{
+    songScript.CatchAndSetupEvents(key);
+}
