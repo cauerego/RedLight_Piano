@@ -35,13 +35,12 @@ class Blink
         sound = cSound;
     }
     
-    public boolean Okay (float init)
+    public boolean Okay (float normTime)
     {
         float interval = 60 / bpm;
+        if (normTime < startTime) return true;
         
-        if (init <= startTime) return true;
-        
-        if (duration > 0 && init >= duration + startTime) return true;
+        if (duration > 0 && normTime > duration + startTime) return true;
         
         if (norm(sTime % interval, 0, interval) > blinkAmmt)
         {

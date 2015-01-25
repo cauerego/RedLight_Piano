@@ -8,8 +8,8 @@ class SongScript
     Sound stepNoise;// = new Sound("blood_splat.mp3");
     Sound startEndNoise;// = new Sound("Hadouken.mp3");
     
-    Blink blink120bpm;// = new Blink(120, blinkNoise);
-    Blink blink2del3sec;// = new Blink(240, 2, 3);
+    Blink blinkFast;// = new Blink(120, blinkNoise);
+    Blink blinkSlowAndStop;// = new Blink(240, 2, 3);
     
     Square[] square = new Square[2];
     
@@ -26,8 +26,8 @@ class SongScript
         stepNoise = new Sound("bip.aif");
         startEndNoise = new Sound("bip.aif");
         
-        blink120bpm = new Blink(480, blinkNoise);
-        blink2del3sec = new Blink(240, 16, 3);
+        blinkFast = new Blink(480, blinkNoise);
+        blinkSlowAndStop = new Blink(240, 0, 3);
         
         // create the grid, without customizing sounds for each cell or square yet
         for (int x = 0; x < 7; x++)
@@ -104,7 +104,7 @@ class SongScript
         //simulatedTime = 59;
         allsquareHold(5);
 
-        initialized = sTime;
+        initialized = sTime; // even if with how sTime works it makes no difference using this in the ending or beginning, it still makes more sense leaving it in the end
     }
     
     // supposed to add squares into the rendering list on the fly, so this should be on draw()
@@ -132,14 +132,14 @@ class SongScript
       
     void squareBlink(int col, int row, float duration)
     {
-      square[01] = new Square(new GridCell(col,row), new GridCell(col,row), duration, mainGrid, simulatedTime); square[01].blink = blink120bpm; squaresList.add(square[01]);  
+      square[01] = new Square(new GridCell(col,row), new GridCell(col,row), duration, mainGrid, simulatedTime); square[01].blink = blinkFast; squaresList.add(square[01]);  
       simulatedTime += duration;
     }
     
     void allsquareBlink (float duration)
     {
         allsquareBlink(simulatedTime, duration);
-        simulatedTime += duration * mainGrid.cells.size();
+        simulatedTime += duration * mainGrid.cells.size());
     }
     void allsquareBlink (float startTime, float duration)
     {
@@ -151,13 +151,13 @@ class SongScript
             GridCell cell = (GridCell) mainGrid.cells.get(i);
             float col = cell.pos.x;
             float row = cell.pos.y;
-            square[01] = new Square(new GridCell(col, row), new GridCell(col,row), duration, mainGrid, startTime); square[01].blink = blink120bpm; squaresList.add(square[01]);
+            square[01] = new Square(new GridCell(col, row), new GridCell(col,row), duration, mainGrid, startTime); square[01].blink = blinkFast; squaresList.add(square[01]);
         }
     }
     
     void squareHold(int col, int row, float duration)
     {
-      square[01] = new Square(new GridCell(col, row),  new GridCell(col, row), duration, mainGrid, simulatedTime); square[01].blink = blink2del3sec; squaresList.add(square[01]);
+      square[01] = new Square(new GridCell(col, row),  new GridCell(col, row), duration, mainGrid, simulatedTime); square[01].blink = blinkSlowAndStop; squaresList.add(square[01]);
       simulatedTime += duration;
     }
     
@@ -167,7 +167,7 @@ class SongScript
       {
         for(int col = 0; col < 7; col++)
         {
-          square[01] = new Square(new GridCell(col, row), new GridCell(col,row), duration, mainGrid, simulatedTime); square[01].blink = blink2del3sec; squaresList.add(square[01]);
+          square[01] = new Square(new GridCell(col, row), new GridCell(col,row), duration, mainGrid, simulatedTime); square[01].blink = blinkSlowAndStop; squaresList.add(square[01]);
           simulatedTime += duration;
         }
       }

@@ -101,15 +101,13 @@ class Square
     {
         if (grid == null) return;
         
-        float dur = duration;
-        
         // normalized initial time
-        float norm = sTime - (initialized + startTime);
-        float ammt = norm / dur;
+        float normTime = sTime - (initialized + startTime);
+        float ammt = normTime / duration;
         
-        if (norm >= 0 && norm < dur)
+        if (normTime >= 0 && normTime < duration)
         {
-            //int steps = int( norm % (stepStartTime) );
+            //int steps = int( normTime % (stepStartTime) );
             //print(start, end, ammt, int(lerp(start.x, end.x, ammt)));
             
             pos = new PVector();
@@ -121,7 +119,8 @@ class Square
             
             PlaySound();
             
-            if (blink == null || blink.Okay(norm))
+            
+            if (blink == null || blink.Okay(normTime))
             {
                 fill(255,0,0);
                 rect(pos.x * grid.cellSize.x, pos.y * grid.cellSize.y, grid.cellSize.x, grid.cellSize.y);
