@@ -139,7 +139,7 @@ class SongScript
     void allsquareBlink (float duration)
     {
         allsquareBlink(simulatedTime, duration);
-        simulatedTime += duration * mainGrid.cells.size());
+        simulatedTime += duration;
     }
     void allsquareBlink (float startTime, float duration)
     {
