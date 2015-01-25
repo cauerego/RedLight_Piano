@@ -13,6 +13,8 @@ class SongScript
     
     Square[] square = new Square[2];
     
+    ArrayList renderTheseSquares = new ArrayList();
+    
     // supposed to be executed just once at setup()
     void Setup ()
     {

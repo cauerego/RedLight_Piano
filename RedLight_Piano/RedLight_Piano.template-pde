@@ -9,8 +9,6 @@
 import ddf.minim.*; // for sound
 Minim minim; // for sound
 
-ArrayList renderTheseSquares = new ArrayList();
-
 SongScript songScript = new SongScript();
 Grid mainGrid = new Grid();
 
@@ -30,6 +28,6 @@ void draw ()
     mainGrid.Display();
     
     // display all squares at once
-    DisplaySquares(renderTheseSquares);
+    Square_DisplaySquares(songScript.renderTheseSquares);
 }
 
