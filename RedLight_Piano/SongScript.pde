@@ -13,11 +13,14 @@ class SongScript
     
     Square[] square = new Square[2];
     
+    float initialized;
     ArrayList renderTheseSquares = new ArrayList();
     
     // supposed to be executed just once at setup()
     void Setup ()
     {
+        initialized = rMillis;
+        
         blinkNoise = new Sound("bip.aif");
         stepNoise = new Sound("bip.aif");
         startEndNoise = new Sound("bip.aif");

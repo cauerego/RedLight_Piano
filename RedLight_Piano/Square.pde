@@ -12,7 +12,6 @@ class Square
     // variables
     
     private Square previousSquare; 
-    private float initialized;
     private PVector pos;
     private PVector floatPos;
     private GridCell lastCell; // just so we know we moved to a new cell and we can rewind the sound
@@ -21,7 +20,6 @@ class Square
     
     private void Initialize ()
     {
-        initialized = rMillis;
         blink = null;
         if (startTime < 0)
         {
@@ -99,7 +97,7 @@ class Square
     
     // methods
     
-    public void Display ()
+    public void Display (float initialized)
     {
         if (grid == null) return;
         
@@ -155,12 +153,12 @@ class Square
 }
 
 // made as public function because couldn't be made as a static method inside class Square
-public void Square_DisplaySquares (ArrayList displaySquares)
+public void Square_DisplaySquares (ArrayList displaySquares, float initialized)
 {
     for (int i = 0; i < displaySquares.size(); i++)
     {
         Square displaySquare = (Square) displaySquares.get(i);
-        displaySquare.Display();
+        displaySquare.Display(initialized);
     }
 }
 

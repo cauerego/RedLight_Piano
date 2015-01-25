@@ -34,7 +34,7 @@ void draw ()
     mainGrid.Display();
     
     // display all squares at once
-    Square_DisplaySquares(songScript.renderTheseSquares);
+    Square_DisplaySquares(songScript.renderTheseSquares, songScript.initialized);
 }
 
 void keyPressed ()
