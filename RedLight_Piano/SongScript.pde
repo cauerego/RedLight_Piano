@@ -80,10 +80,10 @@ class SongScript
         }
         
         // Squares Blinking on Third Collumn
-        simulatedTime = 31;
-        for(int i = 0; i< 10; i +=0.5)
+        //simulatedTime = 31;
+        for(float i = 0; i< 10; i +=0.5)
         {
-          squareBlink(2,i+4,0.2);
+          squareBlink(2,int(i+4),0.2);
         }
         
         // All squares blinking
