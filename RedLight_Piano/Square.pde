@@ -159,6 +159,12 @@ public void Square_DisplaySquares (ArrayList displaySquares, float initialized)
     {
         Square displaySquare = (Square) displaySquares.get(i);
         displaySquare.Display(initialized);
+        
+        // clean up squares that have already being done, to keep the display square list as short as possible
+        if (displaySquare.startTime + displaySquare.duration + 1 < rMillis / 1000.0)
+        {
+            displaySquares.remove(displaySquare);
+        }
     }
 }
 
