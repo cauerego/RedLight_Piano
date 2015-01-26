@@ -4,12 +4,12 @@
 class SongScript
 {
   // sound file names, which need to be mp3 within same folder
-  Sound blinkNoise;// = new Sound("blood_hit.mp3");
-  Sound stepNoise;// = new Sound("blood_splat.mp3");
-  Sound startEndNoise;// = new Sound("Hadouken.mp3");
+  Sound blinkNoise;
+  Sound stepNoise;
+  Sound startEndNoise;
 
-  Blink blinkFast;// = new Blink(120, blinkNoise);
-  Blink blinkSlowAndStop;// = new Blink(240, 2, 3);
+  Blink blinkFast;
+  Blink blinkSlowAndStop;
 
   Square[] square = new Square[2];
 
@@ -27,7 +27,7 @@ class SongScript
     startEndNoise = new Sound("bip.aif");
 
     blinkFast = new Blink(480, blinkNoise);
-    blinkSlowAndStop = new Blink(240, 0, 3);
+    blinkSlowAndStop = new Blink(240, 1, 3);
 
     // create the grid, without customizing sounds for each cell or square yet
     for (int x = 0; x < 7; x++)
