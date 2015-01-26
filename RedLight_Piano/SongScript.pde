@@ -44,14 +44,14 @@ class SongScript
       }
     }
 
-     simulatedTime = millis() / 1000.0;
-     println(sTime +" ; "+ simulatedTime); // there is a delay between sTime and the beginning of this - my print shows 0.088 ; 2.9
-     rowMove(0,31,0,1);
+    simulatedTime = millis() / 1000.0;
+    println(sTime +" ; "+ simulatedTime); // there is a delay between sTime and the beginning of this - my print shows 0.088 ; 2.9
+    rowMove(0,31,0,1);
      
-     /*
+/*
     // All Rows Back to Front
     //simulatedTime = sTime;
-   for (int i = 0; i < 7; i++)
+    for (int i = 0; i < 7; i++)
     {
       if (i > 0 && i < 6)
       {
@@ -106,8 +106,7 @@ class SongScript
     //allsquareHold ==>> duration
     //simulatedTime = 59;
     allsquareHold(5);
-    
-    */
+*/
 
     initialized = sTime; // even if with how sTime works it makes no difference using this in the ending or beginning, it still makes more sense leaving it in the end
   }
