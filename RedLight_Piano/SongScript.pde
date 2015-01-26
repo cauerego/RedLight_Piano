@@ -44,8 +44,8 @@ class SongScript
       }
     }
 
-     simulatedTime = sTime;
-     //Why This Call doesn' work?
+     simulatedTime = millis() / 1000.0;
+     println(sTime +" ; "+ simulatedTime); // there is a delay between sTime and the beginning of this - my print shows 0.088 ; 2.9
      rowMove(0,31,0,1);
      
      /*
