@@ -1,8 +1,8 @@
-// to-do: make it simpler to read and understand
-
+// if defined, will make the Square blink
+// this is a subclass to Square
 class Blink
 {
-    int bpm;
+    int bpm; // beats per minute
     float startTime;
     float duration;
     float blinkAmmt; // from 0 to 1, ammount spent in each blinking state
@@ -37,7 +37,7 @@ class Blink
     
     public boolean Okay (float normTime)
     {
-        float interval = 60 * 1000 / bpm;
+        float interval = 60 * 1000 / bpm; // magical formula to calculate the bpm into mili seconds
         if (normTime < startTime) return true;
         
         if (duration > 0 && normTime > duration + startTime) return true;

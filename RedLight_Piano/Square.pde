@@ -119,9 +119,9 @@ class Square
             
             PlaySound();
             
-            
-            if (blink == null || blink.Okay(normTime))
+            if (blink == null || blink.Okay(normTime)) // this if is meant to work for blinking ...
             {
+                // ... but without blinking, only the if would be excluded
                 fill(255,0,0);
                 rect(pos.x * grid.cellSize.x, pos.y * grid.cellSize.y, grid.cellSize.x, grid.cellSize.y);
             }
