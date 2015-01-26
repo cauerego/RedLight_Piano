@@ -7,10 +7,11 @@ class Square
     Grid grid;
     float startTime = 0; // how long to hold before displaying the square at first, in seconds
     Blink blink;
-//    Opacity opacity;
+    Opacity opacity;
     
     // variables
     
+    public float normTime;
     private Square previousSquare; 
     private PVector pos;
     private PVector floatPos;
@@ -102,7 +103,7 @@ class Square
         if (grid == null) return;
         
         // normalized initial time
-        float normTime = sTime - (initialized + startTime);
+        normTime = sTime - (initialized + startTime);
         float ammt = normTime / duration;
         
         if (normTime >= 0 && normTime < duration)
@@ -122,7 +123,16 @@ class Square
             if (blink == null || blink.Okay(normTime)) // this if is meant to work for blinking ...
             {
                 // ... but without blinking, only the if would be excluded
-                fill(255,0,0);
+                
+                float alpha = 255;
+                // transparency
+                if (opacity != null)
+                {
+                    alpha = opacity.GetAlpha();
+                }
+//println(alpha);
+                
+                fill(255,0,0,alpha);
                 rect(pos.x * grid.cellSize.x, pos.y * grid.cellSize.y, grid.cellSize.x, grid.cellSize.y);
             }
         }

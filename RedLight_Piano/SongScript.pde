@@ -46,8 +46,8 @@ class SongScript
 
     simulatedTime = millis() / 1000.0;
     println(sTime +" ; "+ simulatedTime); // there is a delay between sTime and the beginning of this - my print shows 0.088 ; 2.9
-    rowMove(0,31,0,1);
-     
+    rowMove(0,31,0,3);
+    
 /*
     // All Rows Back to Front
     //simulatedTime = sTime;
@@ -124,7 +124,7 @@ class SongScript
   void rowMove(int colNumber, int startRow, int endRow, float duration)
   {
     square[01] = new Square(new GridCell(colNumber, startRow), new GridCell(colNumber, endRow), duration, mainGrid, stepNoise, simulatedTime, null);
-    square[01].opacity = new Opacity(); 
+    square[01].opacity = new Opacity(square[01], 2, 250);
     squaresList.add(square[01]);
     simulatedTime += duration;
   }
