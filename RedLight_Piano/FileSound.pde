@@ -1,4 +1,4 @@
-class Sound
+class FileSound
 {
     float duration = 500; // default to half second (500)
     String source;
@@ -12,14 +12,14 @@ class Sound
         player = minim.loadFile(source);
     }
 
-    Sound (String cSource) { Initialize(cSource, duration); }
+    FileSound (String cSource) { Initialize(cSource, duration); }
     
-    Sound (String cSource, float cDuration)
+    FileSound (String cSource, float cDuration)
     {
         Initialize(cSource, cDuration);
     }
 
-    Sound (Sound cSound)
+    FileSound (FileSound cSound)
     {
         Initialize(cSound.source, cSound.duration);
     }

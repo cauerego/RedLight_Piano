@@ -39,7 +39,7 @@ class Square
     
     // maximum possible
     private void Initialize (GridCell cStart, GridCell cEnd, float cDuration, Grid cGrid,
-      Sound setGridSound, float cStartTime, Blink cBlink)
+      FileSound setGridSound, float cStartTime, Blink cBlink)
     {
         startTime = cStartTime;
         Initialize(cStart, cEnd, cDuration, cGrid);
@@ -65,7 +65,7 @@ class Square
     }
     
     Square (GridCell cStart, GridCell cEnd, float cDuration, Grid cGrid,
-      Sound setGridSound, float cStartTime, Blink cBlink)
+      FileSound setGridSound, float cStartTime, Blink cBlink)
     {
         Initialize(cStart, cEnd, cDuration, cGrid, setGridSound, cStartTime, cBlink);
     }
@@ -89,7 +89,7 @@ class Square
     }
     
     Square (Square oldSquare, GridCell cEnd, float cDuration, Grid cGrid,
-      Sound setGridSound, float cStartTime, Blink cBlink)
+      FileSound setGridSound, float cStartTime, Blink cBlink)
     {
         Initialize(oldSquare);
         Initialize(previousSquare.end, cEnd, cDuration, cGrid, setGridSound, cStartTime, cBlink);
@@ -131,7 +131,7 @@ class Square
     private void PlaySound ()
     {
         // sound and cell verification: end sound > start sound > grid sound
-        Sound sound = grid.soundArray[int(pos.x)][int(pos.y)];
+        FileSound sound = grid.soundArray[int(pos.x)][int(pos.y)];
         if (pos.dist(start.pos) == 0) sound = start.sound;
         if (floatPos.dist(end.pos) < 1) sound = end.sound;
         

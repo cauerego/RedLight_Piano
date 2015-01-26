@@ -4,9 +4,9 @@
 class SongScript
 {
   // sound file names, which need to be mp3 within same folder
-  Sound blinkNoise;
-  Sound stepNoise;
-  Sound startEndNoise;
+  FileSound blinkNoise;
+  FileSound stepNoise;
+  FileSound startEndNoise;
 
   Blink blinkFast;
   Blink blinkSlowAndStop;
@@ -22,9 +22,9 @@ class SongScript
   // supposed to be executed just once at setup()
   void Setup ()
   {
-    blinkNoise = new Sound("bip.aif");
-    stepNoise = new Sound("bip.aif");
-    startEndNoise = new Sound("bip.aif");
+    blinkNoise = new FileSound("bip.aif");
+    stepNoise = new FileSound("bip.aif");
+    startEndNoise = new FileSound("bip.aif");
 
     blinkFast = new Blink(480, blinkNoise);
     blinkSlowAndStop = new Blink(240, 1, 3);
@@ -37,7 +37,7 @@ class SongScript
         if (x == 0 || x == 6 || y < 19)
         {
           // here, each cell could have a different sound
-          Sound sound = stepNoise; // but we'll just leave a default sound for all cells for now
+          FileSound sound = stepNoise; // but we'll just leave a default sound for all cells for now
           GridCell cell = new GridCell(x, y, sound);
           mainGrid.Add(cell);
         }
@@ -123,7 +123,8 @@ class SongScript
 
   void rowMove(int colNumber, int startRow, int endRow, float duration)
   {
-    square[01] = new Square(new GridCell(colNumber, startRow), new GridCell(colNumber, endRow), duration, mainGrid, stepNoise, simulatedTime, null); 
+    square[01] = new Square(new GridCell(colNumber, startRow), new GridCell(colNumber, endRow), duration, mainGrid, stepNoise, simulatedTime, null);
+    square[01].opacity = new Opacity(); 
     squaresList.add(square[01]);
     simulatedTime += duration;
   }

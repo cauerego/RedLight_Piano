@@ -5,7 +5,7 @@ class Grid
     PVector cellSize;
     //ArrayList<PVector> cells = new ArrayList<PVector>();
     ArrayList cells = new ArrayList();
-    Sound[][] soundArray = new Sound[99][99]; // little ugly hack to enable finding sound per cell position
+    FileSound[][] soundArray = new FileSound[99][99]; // little ugly hack to enable finding sound per cell position
     
     void Add (GridCell cell)
     {
@@ -13,10 +13,10 @@ class Grid
         soundArray[int(cell.pos.x)][int(cell.pos.y)] = cell.sound;
     }
     
-    void SetSound (Sound newSound)
+    void SetSound (FileSound newSound)
     {
         if (newSound == null) return;
-        Sound sound = new Sound(newSound);
+        FileSound sound = new FileSound(newSound);
         
         for (int i = 0; i < cells.size(); i++)
         {
@@ -41,18 +41,18 @@ class Grid
 class GridCell
 {
     PVector pos; // position
-    Sound sound;
+    FileSound sound;
     
-    void Initialize (PVector cPos, Sound newSound)
+    void Initialize (PVector cPos, FileSound newSound)
     {
         pos = cPos;
         if (newSound != null)
         {
-            sound = new Sound(newSound);
+            sound = new FileSound(newSound);
         }
     }
     
-    GridCell (PVector cPos, Sound newSound)
+    GridCell (PVector cPos, FileSound newSound)
     {
         Initialize(cPos, newSound);
     }
@@ -62,17 +62,17 @@ class GridCell
         Initialize(new PVector(x, y), null);
     }
     
-    GridCell (float x, float y, Sound newSound)
+    GridCell (float x, float y, FileSound newSound)
     {
         Initialize(new PVector(x, y), newSound);
     }
     
     GridCell (float x, float y, String soundName)
     {
-        Sound sound = null;
+        FileSound sound = null;
         if (soundName != null)
         {
-            sound = new Sound(soundName);
+            sound = new FileSound(soundName);
         }
         Initialize(new PVector(x, y), sound);
     }
