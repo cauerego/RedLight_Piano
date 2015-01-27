@@ -1,14 +1,7 @@
-// WARNING
-
-// KEEP IN MIND THIS FILE IS BEING IGNORED BY GIT
-
-// MAKE ANY CHANGES INTO THE TEMPLATE ONE !!
-
-
-
 import ddf.minim.*; // for sound
 Minim minim; // for sound
 
+Settings settings = new Settings();
 SongScript songScript = new SongScript();
 Grid mainGrid = new Grid();
 
@@ -20,10 +13,9 @@ void setup ()
 {
     sTime = millis() / 1000.0;
     
-    size (200, 400);
     minim = new Minim(this); // for sound
     
-    mainGrid.cellSize = new PVector(10, 10);
+    settings.Setup();
     
     songScript.Setup();
 }
