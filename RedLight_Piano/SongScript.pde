@@ -27,7 +27,7 @@ class SongScript
     startEndNoise = new FileSound("bip.aif");
 
     blinkFast = new Blink(480, blinkNoise);
-    blinkSlowAndStop = new Blink(240, 1, 3);
+    blinkSlowAndStop = new Blink(240, 1, 4);
 
     // create the grid, without customizing sounds for each cell or square yet
     for (int x = 0; x < 7; x++)
@@ -45,6 +45,8 @@ class SongScript
     }
 
     simulatedTime = millis() / 1000.0;
+    
+    simulatedTime += 2;
     println(sTime +" ; "+ simulatedTime); // there is a delay between sTime and the beginning of this - my print shows 0.088 ; 2.9
     rowMove(0,31,0,3);
     
@@ -124,7 +126,7 @@ class SongScript
   void rowMove(int colNumber, int startRow, int endRow, float duration)
   {
     square[01] = new Square(new GridCell(colNumber, startRow), new GridCell(colNumber, endRow), duration, mainGrid, stepNoise, simulatedTime, null);
-    square[01].opacity = new Opacity(square[01], 2, 250);
+    square[01].opacity = new Opacity(square[01], 0.7, 2.1, 250, 10);
     squaresList.add(square[01]);
     simulatedTime += duration;
   }
