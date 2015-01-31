@@ -48,68 +48,11 @@ class SongScript
     
     simulatedTime += 2;
     println(sTime +" ; "+ simulatedTime); // there is a delay between sTime and the beginning of this - my print shows 0.088 ; 2.9
-    rowMove(0,31,0,3);
     
-/*
-    // All Rows Back to Front
-    //simulatedTime = sTime;
-    for (int i = 0; i < 7; i++)
-    {
-      if (i > 0 && i < 6)
-      {
-        // rowMove ->> colNumber, startRow, endRow, duration
-        rowMove(i, 18, 0, 1);
-      } else
-      {
-        rowMove(i, 30, 0, 1);
-      }
-    }
-
-    // All Columns Bouncing  
-    // collumnBounce ->> colNumber, startRow, endRow, duration
-    //simulatedTime = 7;
-    collumnBounce(0, 31, 0, 2);
-    collumnBounce(1, 19, 0, 2);
-    collumnBounce(2, 19, 0, 2);
-    collumnBounce(3, 19, 0, 2);
-    collumnBounce(4, 19, 0, 2);
-    collumnBounce(5, 19, 0, 2); 
-    collumnBounce(6, 31, 0, 2);
-
-    // Squares Blinking on First Collumn
-    //squareBlink =>> col, row, duration
-    //simulatedTime = 21; 
-    for (int i = 0; i< 10; i +=1)
-    {
-      squareBlink(0, i, 0.2);
-    }
-
-    // Squares Blinking on Third Collumn
-    //simulatedTime = 31;
-    for (float i = 0; i< 10; i +=0.5)
-    {
-      squareBlink(2, int(i+4), 0.2);
-    }
-
-    // All squares blinking
-    //allsquareBlink ==>> duration
-    //simulatedTime = 41;
-    allsquareBlink(5);
-
-    //squareHold();
-    //squareHold ==>> col, row, duration
-    //simulatedTime = 46;
-    squareHold(0, 0, 5);
-    squareHold(5, 5, 5);
-    squareHold(6, 20, 5);
-
-
-    //allsquareHold(); 
-    //allsquareHold ==>> duration
-    //simulatedTime = 59;
-    allsquareHold(5);
-*/
-
+    //Eric, here is the place where you can input values for controlling a collumn
+    // (Collumn Number, Duration, Opacity)
+    colControl(5, 1, 250);
+    
     initialized = sTime; // even if with how sTime works it makes no difference using this in the ending or beginning, it still makes more sense leaving it in the end
   }
 
@@ -121,6 +64,24 @@ class SongScript
     {
       allsquareBlink(sTime, 2);
     }
+  }
+  
+  void colControl(int colNumber, float duration, int alpha)
+  {
+    if((colNumber == 0)||(colNumber == 6)) 
+    {
+      square[01] = new Square(new GridCell(colNumber, 31), new GridCell(colNumber, 0), duration, mainGrid, stepNoise, simulatedTime, null); 
+      square[01].opacity = new Opacity(square[01], 0.7, 2.1, alpha, alpha);
+      squaresList.add(square[01]); 
+      simulatedTime += duration;
+    }
+     if((colNumber > 0)&&(colNumber < 6)) 
+    {
+      square[01] = new Square(new GridCell(colNumber, 19), new GridCell(colNumber, 0), duration, mainGrid, stepNoise, simulatedTime, null); 
+      square[01].opacity = new Opacity(square[01], 0.7, 2.1, alpha, alpha);
+      squaresList.add(square[01]); 
+      simulatedTime += duration;
+    } 
   }
 
   void rowMove(int colNumber, int startRow, int endRow, float duration)

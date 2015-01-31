@@ -1,5 +1,8 @@
 import ddf.minim.*; // for sound
-Minim minim; // for sound
+import ddf.minim.ugens.*;
+Minim minim, minimSynth; // for sound
+AudioOutput out;
+Noise       noiseStep;
 
 Settings settings = new Settings();
 SongScript songScript = new SongScript();
@@ -14,6 +17,15 @@ void setup ()
     sTime = millis() / 1000.0;
     
     minim = new Minim(this); // for sound
+    
+    minimSynth = new Minim(this); // for soundSynth
+    
+    out = minimSynth.getLineOut();
+    
+    noiseStep = new Noise(0.05);
+    
+   // Test Synth 
+   //noiseStep.patch(out);
     
     settings.Setup();
     
