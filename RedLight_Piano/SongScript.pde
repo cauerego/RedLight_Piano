@@ -7,6 +7,8 @@ class SongScript
   FileSound blinkNoise;
   FileSound stepNoise;
   FileSound startEndNoise;
+  
+  Synth stepSynth;
 
   Blink blinkFast;
   Blink blinkSlowAndStop;
@@ -26,6 +28,8 @@ class SongScript
     blinkNoise = new FileSound("bip.aif");
     stepNoise = new FileSound("bip.aif");
     startEndNoise = new FileSound("bip.aif");
+    
+    //stepSynth = new Synth;
 
     blinkFast = new Blink(480, blinkNoise);
     blinkSlowAndStop = new Blink(240, 1, 4);
@@ -179,8 +183,6 @@ class SongScript
     }
   }
   
-  
-  
   void rowHold(int colNumber, int startRow, int endRow, float duration, float holdDuration)
   {
     square[01] = new Square(new GridCell(colNumber, startRow), new GridCell(colNumber, endRow), duration, mainGrid, stepNoise, simulatedTime, null);
@@ -192,7 +194,5 @@ class SongScript
     squaresList.add(square[01]);
     simulatedTime += duration;
   }
-    
- 
 }
 

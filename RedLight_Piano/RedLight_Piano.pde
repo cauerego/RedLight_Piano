@@ -24,8 +24,8 @@ void setup ()
     
     noiseStep = new Noise(0.05);
     
-   // Test Synth 
-   //noiseStep.patch(out);
+   //Test Synth 
+   
     
     settings.Setup();
     
