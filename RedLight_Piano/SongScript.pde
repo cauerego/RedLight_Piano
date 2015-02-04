@@ -10,6 +10,7 @@ class SongScript
 
   Blink blinkFast;
   Blink blinkSlowAndStop;
+  Blink blinkHold;
 
   Square[] square = new Square[2];
 
@@ -28,6 +29,7 @@ class SongScript
 
     blinkFast = new Blink(480, blinkNoise);
     blinkSlowAndStop = new Blink(240, 1, 4);
+    blinkHold = new Blink(1,0,24,0);
 
     // create the grid, without customizing sounds for each cell or square yet
     for (int x = 0; x < 7; x++)
@@ -49,10 +51,9 @@ class SongScript
     simulatedTime += 2;
     println(sTime +" ; "+ simulatedTime); // there is a delay between sTime and the beginning of this - my print shows 0.088 ; 2.9
     
-    //Eric, here is the place where you can input values for controlling a collumn
-    // (Collumn Number, Duration, Opacity)
-    colControl(5, 1, 250);
-    
+ 
+  randomSquares(0.05);
+
     initialized = sTime; // even if with how sTime works it makes no difference using this in the ending or beginning, it still makes more sense leaving it in the end
   }
 
@@ -130,10 +131,10 @@ class SongScript
     }
   }
 
-  void squareHold(int col, int row, float duration)
+  void squareHold(float startTime, int col, int row, float duration)
   {
-    square[01] = new Square(new GridCell(col, row), new GridCell(col, row), duration, mainGrid, simulatedTime); 
-    square[01].blink = blinkSlowAndStop; 
+    square[01] = new Square(new GridCell(col, row), new GridCell(col, row), duration, mainGrid, startTime);//simulatedTime); 
+    square[01].blink = blinkHold; 
     squaresList.add(square[01]);
     simulatedTime += duration;
   }
@@ -151,5 +152,33 @@ class SongScript
       }
     }
   }
+  
+  void randomSquares(float duration)
+  {
+    for(float i = 0.0; i < 100.0; i +=0.05)
+    {
+      int randomColumn = int(random(7));
+      int randomTime = int(random(20));
+      float randomDur = int(random(1));
+      if(randomColumn == 0 || randomColumn == 6)
+      {
+         int randomRow = int(random(10,31));
+         square[01] = new Square(new GridCell(randomColumn, randomRow), new GridCell(randomColumn, randomRow), duration, mainGrid, i); 
+         square[01].blink = blinkHold; 
+         squaresList.add(square[01]);
+         simulatedTime += duration;
+      }
+               
+  else
+     {
+         int randomRow = int(random(19));
+         square[01] = new Square(new GridCell(randomColumn, randomRow), new GridCell(randomColumn, randomRow), duration, mainGrid, i); 
+         square[01].blink = blinkHold; 
+         squaresList.add(square[01]);
+         simulatedTime += duration;
+     }
+    }
+}
+      
 }
 
