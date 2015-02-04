@@ -53,20 +53,20 @@ class SongScript
     simulatedTime = millis() / 1000.0;
     
     simulatedTime += 2;
-    println(sTime +" ; "+ simulatedTime); // there is a delay between sTime and the beginning of this - my print shows 0.088 ; 2.9
+    println(sysTime +" ; "+ simulatedTime); // there is a delay between sysTime and the beginning of this - my print shows 0.088 ; 2.9
     
     rowHold(0,31,0,1,10);
     
-    initialized = sTime; // even if with how sTime works it makes no difference using this in the ending or beginning, it still makes more sense leaving it in the end
+    initialized = sysTime; // even if with how sysTime works it makes no difference using this in the ending or beginning, it still makes more sense leaving it in the end
   }
 
   // supposed to add squares into the rendering list on the fly, so this should be on draw()
-  // PS: after adding this looks like the whole songscript is not starting at 1 sTime anymore
+  // PS: after adding this looks like the whole songscript is not starting at 1 sysTime anymore
   void CatchAndSetupEvents (char key)
   {
     if (key == 'A' || key == 'a')
     {
-      allsquareBlink(sTime, 2);
+      allsquareBlink(sysTime, 2);
     }
   }
   

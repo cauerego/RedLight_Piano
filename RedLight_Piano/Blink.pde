@@ -42,7 +42,7 @@ class Blink
         
         if (duration > 0 && normTime > duration + startTime) return true;
         
-        if (norm((sTime * 1000) % interval, 0, interval) > blinkAmmt)
+        if (norm((sysTime * 1000) % interval, 0, interval) > blinkAmmt)
         {
             if (sound != null) sound.Play();
             return true;

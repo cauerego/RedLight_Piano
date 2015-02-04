@@ -32,9 +32,9 @@ class Opacity
     
     float GetAlpha ()
     {
-        float normStart = startTime + sTime - square.normTime;
-        float ammt = norm(sTime, normStart, normStart + duration);
-//println(sTime +" ; "+ ammt +" ; "+ norm); 
+        float normStart = startTime + sysTime - square.normTime;
+        float ammt = norm(sysTime, normStart, normStart + duration);
+//println(sysTime +" ; "+ ammt +" ; "+ norm); 
         return lerp(startOpacity, endOpacity, ammt);
     }
 }

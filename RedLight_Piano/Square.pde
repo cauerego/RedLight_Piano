@@ -103,7 +103,7 @@ class Square
         if (grid == null) return;
         
         // normalized initial time
-        normTime = sTime - (initialized + startTime);
+        normTime = sysTime - (initialized + startTime);
         float ammt = normTime / duration;
         
         if (normTime >= 0 && normTime < duration)
@@ -170,7 +170,7 @@ public void Square_DisplaySquares (ArrayList displaySquares, float initialized)
         displaySquare.Display(initialized);
         
         // clean up squares that have already being done, to keep the display square list as short as possible
-        if (displaySquare.startTime + displaySquare.duration + 1 < sTime)
+        if (displaySquare.startTime + displaySquare.duration + 1 < sysTime)
         {
             displaySquares.remove(displaySquare);
         }

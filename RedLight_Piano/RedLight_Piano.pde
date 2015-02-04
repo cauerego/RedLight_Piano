@@ -10,11 +10,11 @@ Grid mainGrid = new Grid();
 
 // normalized millis into seconds and into same momment
 // for everything within each common event (setup, draw, etc)
-float sTime;
+float sysTime;
 
 void setup ()
 {
-    sTime = millis() / 1000.0;
+    sysTime = millis() / 1000.0;
     
     minim = new Minim(this); // for sound
     
@@ -34,7 +34,7 @@ void setup ()
 
 void draw ()
 {
-    sTime = millis() / 1000.0;
+    sysTime = millis() / 1000.0;
     
     background(0);
     mainGrid.Display();

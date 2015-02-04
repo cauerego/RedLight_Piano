@@ -26,10 +26,10 @@ class FileSound
     
     void Play ()
     {
-        if (startedPlaying < 0 || sTime > startedPlaying + duration)
+        if (startedPlaying < 0 || sysTime > startedPlaying + duration)
         {
             player.play();
-            startedPlaying = sTime;
+            startedPlaying = sysTime;
         }
     }
     
