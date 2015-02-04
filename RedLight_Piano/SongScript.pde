@@ -51,9 +51,8 @@ class SongScript
     simulatedTime += 2;
     println(sTime +" ; "+ simulatedTime); // there is a delay between sTime and the beginning of this - my print shows 0.088 ; 2.9
     
- 
-  randomSquares(0.05);
-
+    rowHold(0,31,0,1,10);
+    
     initialized = sTime; // even if with how sTime works it makes no difference using this in the ending or beginning, it still makes more sense leaving it in the end
   }
 
@@ -131,9 +130,9 @@ class SongScript
     }
   }
 
-  void squareHold(float startTime, int col, int row, float duration)
+  void squareHold(int col, int row, float duration)
   {
-    square[01] = new Square(new GridCell(col, row), new GridCell(col, row), duration, mainGrid, startTime);//simulatedTime); 
+    square[01] = new Square(new GridCell(col, row), new GridCell(col, row), duration, mainGrid, simulatedTime); 
     square[01].blink = blinkHold; 
     squaresList.add(square[01]);
     simulatedTime += duration;
@@ -178,7 +177,22 @@ class SongScript
          simulatedTime += duration;
      }
     }
-}
-      
+  }
+  
+  
+  
+  void rowHold(int colNumber, int startRow, int endRow, float duration, float holdDuration)
+  {
+    square[01] = new Square(new GridCell(colNumber, startRow), new GridCell(colNumber, endRow), duration, mainGrid, stepNoise, simulatedTime, null);
+    square[01].opacity = new Opacity(square[01], 0.7, 2.1, 250, 10);
+    squaresList.add(square[01]);
+    simulatedTime += duration;
+    square[01] = new Square(new GridCell(colNumber, endRow), new GridCell(colNumber, endRow), holdDuration, mainGrid, simulatedTime); 
+    square[01].blink = blinkHold; 
+    squaresList.add(square[01]);
+    simulatedTime += duration;
+  }
+    
+ 
 }
 
