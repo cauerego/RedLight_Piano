@@ -8,8 +8,6 @@ class SongScript
   FileSound stepNoise;
   FileSound startEndNoise;
   
-  Synth stepSynth;
-
   Blink blinkFast;
   Blink blinkSlowAndStop;
   Blink blinkHold;
@@ -29,8 +27,6 @@ class SongScript
     stepNoise = new FileSound("bip.aif");
     startEndNoise = new FileSound("bip.aif");
     
-    //stepSynth = new Synth;
-
     blinkFast = new Blink(480, blinkNoise);
     blinkSlowAndStop = new Blink(240, 1, 4);
     blinkHold = new Blink(1,0,24,0);
