@@ -4,9 +4,9 @@
 class SongScript
 {
   // sound file names, which need to be mp3 within same folder
-  FileSound blinkNoise;
-  FileSound stepNoise;
-  FileSound startEndNoise;
+  GridSound blinkNoise;
+  GridSound stepNoise;
+  GridSound startEndNoise;
   
   Blink blinkFast;
   Blink blinkSlowAndStop;
@@ -23,9 +23,9 @@ class SongScript
   // supposed to be executed just once at setup()
   void Setup ()
   {
-    blinkNoise = new FileSound("bip.aif");
-    stepNoise = new FileSound("bip.aif");
-    startEndNoise = new FileSound("bip.aif");
+    blinkNoise = new GridSound("bip.aif");
+    stepNoise = new GridSound("bip.aif");
+    startEndNoise = new GridSound("bip.aif");
     
     blinkFast = new Blink(480, blinkNoise);
     blinkSlowAndStop = new Blink(240, 1, 4);
@@ -39,7 +39,7 @@ class SongScript
         if (x == 0 || x == 6 || y < 19)
         {
           // here, each cell could have a different sound
-          FileSound sound = stepNoise; // but we'll just leave a default sound for all cells for now
+          GridSound sound = stepNoise; // but we'll just leave a default sound for all cells for now
           GridCell cell = new GridCell(x, y, sound);
           mainGrid.Add(cell);
         }

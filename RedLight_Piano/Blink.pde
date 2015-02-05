@@ -6,10 +6,10 @@ class Blink
     float startTime;
     float duration;
     float blinkAmmt; // from 0 to 1, ammount spent in each blinking state
-    FileSound sound;
+    GridSound sound;
     
     Blink (int cBpm) { Initialize(cBpm, 0, -1, 0.5, null); }
-    Blink (int cBpm, FileSound cSound)
+    Blink (int cBpm, GridSound cSound)
     {
         Initialize(cBpm, 0, -1, 0.5, cSound);
     }
@@ -21,12 +21,12 @@ class Blink
     {
         Initialize(cBpm, cStartTime, cDuration, cBlinkAmmt, null);
     }
-    Blink (int cBpm, float cStartTime, float cDuration, float cBlinkAmmt, FileSound cSound)
+    Blink (int cBpm, float cStartTime, float cDuration, float cBlinkAmmt, GridSound cSound)
     {
         Initialize(cBpm, cStartTime, cDuration, cBlinkAmmt, cSound);
     }
     
-    public void Initialize (int cBpm, float cStartTime, float cDuration, float cBlinkAmmt, FileSound cSound)
+    public void Initialize (int cBpm, float cStartTime, float cDuration, float cBlinkAmmt, GridSound cSound)
     {
         startTime = cStartTime;
         duration = cDuration;

@@ -1,4 +1,4 @@
-class FileSound
+class GridSound
 {
     float duration = 500; // default to half second (500)
     String source;
@@ -12,14 +12,14 @@ class FileSound
         player = minim.loadFile(source);
     }
 
-    FileSound (String cSource) { Initialize(cSource, duration); }
+    GridSound (String cSource) { Initialize(cSource, duration); }
     
-    FileSound (String cSource, float cDuration)
+    GridSound (String cSource, float cDuration)
     {
         Initialize(cSource, cDuration);
     }
 
-    FileSound (FileSound cSound)
+    GridSound (GridSound cSound)
     {
         Initialize(cSound.source, cSound.duration);
     }
