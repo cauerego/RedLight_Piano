@@ -51,7 +51,8 @@ class SongScript
     simulatedTime += 2;
     println(sysTime +" ; "+ simulatedTime); // there is a delay between sysTime and the beginning of this - my print shows 0.088 ; 2.9
     
-    rowHold(0,31,0,1,10);
+    //rowMove(0,31,0,3);
+    rowHold(0,31,0,3,20);
     
     initialized = sysTime; // even if with how sysTime works it makes no difference using this in the ending or beginning, it still makes more sense leaving it in the end
   }
@@ -124,7 +125,8 @@ class SongScript
       GridCell cell = (GridCell) mainGrid.cells.get(i);
       float col = cell.pos.x;
       float row = cell.pos.y;
-      square[01] = new Square(new GridCell(col, row), new GridCell(col, row), duration, mainGrid, startTime); 
+      square[01] = new Square(new GridCell(col, row), new GridCell(col, row), duration, mainGrid, startTime);
+      //square[01].opacity = new Opacity(square[01]);
       square[01].blink = blinkFast; 
       squaresList.add(square[01]);
     }
@@ -182,10 +184,11 @@ class SongScript
   void rowHold(int colNumber, int startRow, int endRow, float duration, float holdDuration)
   {
     square[01] = new Square(new GridCell(colNumber, startRow), new GridCell(colNumber, endRow), duration, mainGrid, stepNoise, simulatedTime, null);
-    square[01].opacity = new Opacity(square[01], 0.7, 2.1, 250, 10);
+    square[01].opacity = new Opacity(square[01], 0.7, 2.1, 250, 10, true);
     squaresList.add(square[01]);
     simulatedTime += duration;
     square[01] = new Square(new GridCell(colNumber, endRow), new GridCell(colNumber, endRow), holdDuration, mainGrid, simulatedTime); 
+    square[01].opacity = new Opacity(square[01]);
     square[01].blink = blinkHold; 
     squaresList.add(square[01]);
     simulatedTime += duration;

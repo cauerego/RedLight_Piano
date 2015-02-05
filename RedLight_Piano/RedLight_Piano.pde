@@ -42,3 +42,19 @@ void keyPressed ()
 {
     songScript.CatchAndSetupEvents(key);
 }
+
+void mouseMoved()
+{
+    // for some reason, "height*2" is the only way to make it work as expected on my mac here, but the *2 shouldn't be needed!
+    float opacity = (byte) map( mouseY, 0, height*2, 0, 255 ); // move mouse up and down to set event opacity
+    float activate = map( mouseX, 0, width, 0, 1 ); // need to be within an area to be activated
+    
+    if (activate > 0.5) { // on half screen mouse is active, on the other half it isn't
+        Opacity_value = opacity;
+    }
+    else
+    {
+        Opacity_value = -1;
+    }
+}
+
