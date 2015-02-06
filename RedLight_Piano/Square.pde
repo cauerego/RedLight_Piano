@@ -148,7 +148,7 @@ class Square
         // applying lastCell verification
         if (lastCell != null && pos.dist(lastCell.pos) > 0)
         {
-            if (lastCell.sound != null) lastCell.sound.Rewind();
+            if (lastCell.sound != null) lastCell.sound.FixSound();
         }
         lastCell = new GridCell(pos.x, pos.y);
         lastCell.sound = sound;

@@ -24,7 +24,7 @@ class SongScript
   void Setup ()
   {
     blinkNoise = new GridSound("bip.aif");
-    stepNoise = new GridSound("bip.aif");
+    stepNoise = new GridSound(440, 0.5f, Waves.SINE, 0.05); // in my machine if i try with 0.1 or higher, the result is very different!
     startEndNoise = new GridSound("bip.aif");
     
     blinkFast = new Blink(480, blinkNoise);

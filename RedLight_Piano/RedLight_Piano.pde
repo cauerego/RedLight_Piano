@@ -25,6 +25,8 @@ void setup ()
     settings.Setup();
     
     songScript.Setup();
+    
+    //GridSound we = new GridSound(440, 0.5f, Waves.SINE, 0.3); we.Play(); // this is working fine!
 }
 
 void draw ()
@@ -36,6 +38,8 @@ void draw ()
     
     // display all squares at once
     Square_DisplaySquares(songScript.squaresList, songScript.initialized);
+    
+    CallUpdates();
 }
 
 void keyPressed ()
@@ -58,3 +62,7 @@ void mouseMoved()
     }
 }
 
+void CallUpdates ()
+{
+    Wave_Update();
+}
